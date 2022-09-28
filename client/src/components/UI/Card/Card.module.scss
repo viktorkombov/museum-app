@@ -1,0 +1,101 @@
+@import '../../../variables';
+.card {
+    background-color: #272626;
+    color: white;
+    border-radius: 10px;
+    text-align: left;
+    overflow: hidden;
+    transition: all .2s cubic-bezier(0.55,.085,.68,.53);
+}
+
+.header {
+    position: relative;
+    ::before {
+        content: '';
+        background-image: linear-gradient(to bottom,transparent,rgba(0, 0, 0, .6));
+        transition: opacity .2s cubic-bezier(0.55,.085,.68,.53);
+        opacity: .4;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.card-light {
+    background-color: lighten(map-get($colors, main), 30%);
+    color: white;
+}
+
+.img-wrapper {
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.img-wrapper img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.body {
+    padding: 1.5rem;
+}
+
+.title-wrapper {
+    margin-bottom: 0.6rem;
+}
+
+.content-wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.card:hover,
+.card:active {
+    background-color: #272626e8;
+    cursor: pointer;
+    color: map-get($colors, secondary);
+    .header {
+        ::before {
+            opacity: 1;
+        }
+    }
+}
+
+.card-light:hover,
+.card-light:active {
+    background-color: rgba(255,255,255, 0.8);
+    color: black;
+    cursor: pointer;
+}
+
+
+
+.button-wrapper button {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    background-color: map-get($colors, secondary);
+    color: black;
+    border-color: transparent;
+    width: 100%;
+    text-align: left;
+    transition: all .2s cubic-bezier(0.55,.085,.68,.53);
+}
+
+.card:hover .button-wrapper button,
+.card:active .button-wrapper button,
+.card .button-wrapper button:hover,
+.card .button-wrapper button:active {
+    background-color: lighten(map-get($colors, secondary), 5%);
+}
+
+.card-light:hover .button-wrapper button,
+.card-light:active .button-wrapper button,
+.card-light .button-wrapper button:hover,
+.card-light .button-wrapper button:active {
+    background-color: rgba(0,0,0, 0.8);
+    color: white;
+}

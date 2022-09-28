@@ -1,0 +1,27 @@
+@import '../../../variables';
+.aside {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-content: flex-start;
+    pointer-events: none;
+}
+
+.fake-header {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    height: 5.5rem;
+}
+
+.body {
+    grid-row: 2;
+    grid-column: 5 / 7;
+    margin: 2rem 4rem;
+    pointer-events: auto;
+    
+}
+
+.heading {
+    color: map-get($colors, links);
+}

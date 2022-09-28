@@ -1,0 +1,61 @@
+@import "../../../variables";
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    background-color: lighten(map-get($colors, main), 10%);
+    padding: 5rem 0 2rem 0;
+
+    .contacts {
+        li {
+            margin-bottom: 0.3rem;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        li {
+            list-style: none;
+        }
+    }
+}
+
+.find-us {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-link {
+    color: #fff;
+    height: 45px;
+    width: 45px;
+    /* padding-right: 1.5px;
+    padding-top: 2px; */
+    background-color: map-get($colors, links);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 0 1px 0.5px rgba(255, 255, 255);
+    font-size: 1.5rem;
+    &:hover {
+        background-color: #ffffff;
+        color: map-get($colors, links);
+        box-shadow: 0 0 3px 1px map-get($colors, links);
+    }
+}
+
+.social-networks-links {
+    display: flex;
+    li {
+        margin-right: 0.7rem;
+    }
+}

@@ -1,0 +1,57 @@
+@import "../../../variables";
+.dropdown-items {
+    display: block !important;
+    padding: 0;
+}
+
+.dropdown-menu {
+    background-color: map-get($colors, main);
+    border-radius: 0;
+    border: 1px solid #4a4a4a;
+    padding: 0;
+}
+
+// .dropdown-item span {
+//     background-image: linear-gradient(map-get($colors, secondary), map-get($colors, secondary));
+//     background-position: center bottom;
+//     background-repeat: no-repeat;
+//     transition: background-size 0.1s cubic-bezier(0.55, 0.085, 0.68, 0.53) !important;
+//     padding-bottom: 0.5rem !important;
+// }
+
+.dropdown-item span {
+    background-image: linear-gradient(map-get($colors, secondary), map-get($colors, secondary));
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    padding-bottom: 2px;
+    background-size: 0 2px;
+}
+
+.dropdown-item {
+    border-bottom: 1px solid #4a4a4a;
+    padding: 0.5rem;
+    padding-right: 1.5rem;
+    font-size: 0.9rem;
+    &:active {
+        background-color: inherit;
+    }
+    &:hover, &:focus {
+        background-color: lighten(map-get($colors, main), 2%);
+
+        span {
+            color: map-get($colors, secondary);
+            background-size: 100% 2px;
+        }
+    }
+}
+
+.dropdown-item--last {
+    border-bottom: none;
+}
+
+// .dropdown-item:hover span {
+//     transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+//     background-size: 100% 2px;
+//     color: map-get($colors, secondary);
+// }

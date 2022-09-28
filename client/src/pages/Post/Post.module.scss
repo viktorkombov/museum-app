@@ -1,0 +1,6 @@
+.article {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 2rem;
+    align-content: flex-start;
+}

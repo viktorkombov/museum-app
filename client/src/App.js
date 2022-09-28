@@ -1,24 +1,29 @@
 import logo from './logo.svg';
-import './App.css';
+import Header from './components/Layouts/Header';
+import CarouselBootstrap from './components/UI/CarouselBootstrap';
+import { Fragment } from 'react';
+import img from './images/museum.jpg';
+import inc from './images/inc.jpg';
+import Footer from './components/Layouts/Footer';
+import classes from './App.module.scss';
+import Home from './pages/Home';
+import Post from './pages/Post';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header />
+      <div style={{ position: 'relative', zIndex: '2', height: '100%', maxHeight: '750px', backgroundColor: '#fff' }}>
+        <CarouselBootstrap items={[{ image: img }, { image: inc }]}></CarouselBootstrap>
+      </div>
+      <main className={classes.main}>
+        <Post/>
+        <div style={{ background: 'transperant', height: '151px' }}></div>
+      </main>
+      <Footer />
+      {/*  */}
+    </Fragment>
   );
 }
 
