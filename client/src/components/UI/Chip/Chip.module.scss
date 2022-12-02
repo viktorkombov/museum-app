@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .chip-primary {
     display: inline-flex;
     align-items: center;
@@ -18,9 +20,5 @@
 }
 
 .chip__content {
-    margin-right: .6rem;
-    margin-left: 0.3rem;
-    display: flex;
-    align-items: center;
-    padding-top: 0.2rem;
+    @include align-to-icon;
 }

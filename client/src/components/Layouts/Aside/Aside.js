@@ -1,19 +1,18 @@
+
 import PostSummary from '../../UI/PostSummary';
+import img from '../../../images/watch.jpg';
+import image from '../../../images/museum.jpg';
+import image1 from '../../../images/uchilishte.jpg';
 import classes from './Aside.module.scss';
+import Card from '../../UI/Card';
 
 const Aside = props => {
-    const heading = 'Новини';
-    const summaries = Array(5).fill({
-        date: '2.09.2022 г.',
-        title: 'Новина',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet consequuntur quia odit ex earum vel?'
-    });
+    const { children } = props;
     return (
         <section className={classes.aside}>
-            <section className={classes['fake-header']}></section>
             <section className={classes.body}>
-                <h3 className={classes.heading}>{heading}</h3>
-                {summaries.map((summary, i, array) => i < array.length - 1 ? <PostSummary summary={summary}/> : <PostSummary summary={summary} isLastSummary={true} />)}
+                {children}
+               
             </section>
         </section>
     );

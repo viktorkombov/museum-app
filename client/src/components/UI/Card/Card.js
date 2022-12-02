@@ -1,12 +1,18 @@
 import classes from './Card.module.scss';
 
 const Card = props => {
+    const { media } = props;
     const cardClasses = props.cardClasses?.length ? props.cardClasses.map(cardClass => classes[cardClass]) : [];
     return (
-        <div className={`${classes.card} ${cardClasses.join(' ')}`} style={{ width: props.width || '100%' }}>
+        <div className={`${classes.card} ${media && classes['card-media']} ${props.light && classes['card-light']} ${cardClasses.join(' ')}`} style={{
+            backgroundImage: props.img ? `url(${props.img})`: 'none',
+            backgroundSize: 'cover',
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            width: props.width || '100%', maxWidth: props.maxWidth || '100%'
+        }}>
             {props.img && <section className={classes.header}>
-                <div className={classes['img-wrapper']}>
-                    <img src={props.img} alt="" />
+                <div className={classes['backdrop-gradient']}>
                 </div>
             </section>}
             <section className={classes.body}>

@@ -1,9 +1,10 @@
 import { ExpandMore } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 import DropDown from '../DropDown';
 import classes from './NavBarDropDown.module.scss';
 
 const NavBarDropDown = ({ dropDownItems }) => {
-    const buttonText = dropDownItems.buttonText;
+    const buttonText = dropDownItems.name;
     const classList = dropDownItems.classList;
     const items = dropDownItems.items;
     return (
@@ -14,7 +15,7 @@ const NavBarDropDown = ({ dropDownItems }) => {
                     <ExpandMore style={{ verticalAlign: 'top'}}  />
                 </span>
             </span>
-            {items.map((item, i) => <a key={i}>{item}</a>)}
+            {items.map((item, i) => <Link to={item.link} key={i} >{item.name}</Link>)}
         </DropDown>
     );
 }

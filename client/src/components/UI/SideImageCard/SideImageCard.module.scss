@@ -24,6 +24,13 @@
             background-size: 0 1px;
         }
     }
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+        .image-wrapper {
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 10px;
+        }
+    }
 }
 
 .card::before {
@@ -106,6 +113,10 @@
         //     transition: none;
         // }
     }
+}
+
+.content-wrapper {
+    margin-bottom: 3.5rem;
 }
 
 .card > section {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Fade from 'react-bootstrap/Fade';
+import { Link } from 'react-router-dom';
 
 import classes from './DropDown.module.scss';
 
@@ -41,18 +42,26 @@ const CustomMenu = React.forwardRef(
 
 const DropDown = props => {
     const [isActive, setIsActive] = useState(false);
-    const onClick = (args, secondArgs) => {
-        // setIsActive(state => !state)
+    const [show, setShow] = useState(false);
+
+    const showDropdown = (e) => {
+        setShow(!show);
+        setIsActive(!show)
     }
+    const hideDropdown = e => {
+        setShow(false);
+        setIsActive(false);
+    }
+
     const onToggle = (show, ui) => {
+        console.log('asd')
         setIsActive(show);
     }
-    const click = (event) => {
-        // event.preventDefault();
-        // event.stopPropagation();
-    }
+
     return (
-        <Dropdown onMouseEnter={onClick} onMouseLeave={onClick} onClick={click} onToggle={onToggle} className={isActive ? props.activeClass : ''}>
+        <Dropdown onToggle={onToggle} className={isActive ? props.activeClass : ''} show={show} onMouseEnter={showDropdown}
+        onMouseLeave={hideDropdown} >
+        {/* <Dropdown onToggle={onToggle} className={isActive ? props.activeClass : ''}> */}
             <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                 {React.Children.toArray(props.children)[0]}
             </Dropdown.Toggle>
@@ -66,7 +75,7 @@ const DropDown = props => {
                         if (i === 1) {
                             itemClassList.push(classes['dropdown-item--first'])
                         }
-                        return <Dropdown.Item className={itemClassList.join(' ')} eventKey={i}>
+                        return <Dropdown.Item onClick={hideDropdown} as={Link} to={child.props.to} className={itemClassList.join(' ')} eventKey={i}>
                             <span>{child}</span></Dropdown.Item>
                     })}
                 </Dropdown.Menu>

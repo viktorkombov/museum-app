@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+/public/map
+/src/images/map
 
 # testing
 /coverage
