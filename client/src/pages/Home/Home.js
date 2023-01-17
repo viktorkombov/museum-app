@@ -1,13 +1,12 @@
 import { Fragment } from 'react';
 
 import SideImageCard from '../../components/UI/SideImageCard';
-import img from '../../images/watch.jpg';
-import image from '../../images/museum.jpg';
-import image1 from '../../images/uchilishte.jpg';
+import watchImg from '../../images/watch.jpg';
+import museumImg from '../../images/museum.jpg';
+import incImg from '../../images/inc.jpg';
 import classes from './Home.module.scss';
-import Card from '../../components/UI/Card';
 import { AccessTime, Campaign, CampaignRounded, LocalActivity } from '@mui/icons-material';
-import { Button as ButtonMaterial, Grid, Link } from '@mui/material';
+import { Button as ButtonMaterial } from '@mui/material';
 import Button from '../../components/UI/Button/Button';
 import ThreeCardsView from '../../components/Layouts/ThreeCardsView/ThreeCardsView';
 import TwoCardsView from '../../components/Layouts/TwoCardsView';
@@ -15,16 +14,26 @@ import SectionHeader from '../../components/UI/SectionHeader/SectionHeader';
 import Delimiter from '../../components/UI/Delimiter';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import PageTransition from '../../components/UI/PageTransition';
+import { Link } from 'react-router-dom';
+// import RichTextEditor from '../../components/FormElements/RichTextEditor';
 
 const Home = props => {
 
     return (
         <Fragment>
             <PageTransition>
-                <CarouselBootstrap type="withCard" items={[{ src: "http://hotelmap.bg/uploads/images/gallery/a0633b641d96b05db403864588f1122e9951716.jpg", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+                <CarouselBootstrap type="withCard" items={[{ src: museumImg, title: 'Национален музей "Христо Ботев"', subtitle: "Разгледайте нашия сайт, за да научите повече за музея на Ботев в Калофер", link: "/museum/botev-house" }, { src: watchImg, title: "Джобен часовник", subtitle: "Разгледайте нашия сайт, за да научите повече за личните вещи на Христо Ботев", link: "/hristo-botev/belongings"  }, { src: incImg, title: "Пишещи принадлежности", subtitle: "Разгледайте нашия сайт, за да научите повече за личните вещи на Христо Ботев", link: "/hristo-botev/belongings", }]}></CarouselBootstrap>
 
                 <section className={classes.home}>
                     <section className={`${classes.section1} ${classes['first-section']}`}>
+                        <section className={`${classes.section1} ${classes.welcome} ${classes['section--dark']}`}>
+                            <article>
+                                <h4>Добре дошли в Национален музей “Христо Ботев” - гр. Калофер</h4>
+                                <p>Разгледайте нашия сайт, за да научите повече за живота и делото на Христо Ботев.</p>
+                                <Button>Виж повече...</Button>
+                            </article>
+                            <Delimiter white className={classes['first-section-delimiter']} />
+                        </section>
                         <SectionHeader className={classes['first-section-header']}>
                             <h2>Актуално</h2>
                             <article>
@@ -51,17 +60,10 @@ const Home = props => {
                         <h1>Актуално</h1>
                         <ThreeCardsView>
                             <div className={classes['first-section-more-link']}>
-                                <ButtonMaterial variant="outlined">Виж още новини</ButtonMaterial>
+                                <ButtonMaterial component={Link} to="/news" variant="outlined">Виж още новини</ButtonMaterial>
                             </div>
                         </ThreeCardsView>
                         <Delimiter />
-                        <section className={`${classes.section1} ${classes.welcome} ${classes['section--dark']}`}>
-                            <article>
-                                <h4>Добре дошли в Национален музей “Христо Ботев” - гр. Калофер</h4>
-                                <p>Разгледайте нашия сайт, за да научите повече за живота и делото на Христо Ботев.</p>
-                                <Button>Виж повече...</Button>
-                            </article>
-                        </section>
                     </section>
                     <TwoCardsView whiteHeader>
                         <h3>Музеен комплекс</h3>

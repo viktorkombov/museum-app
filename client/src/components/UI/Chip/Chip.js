@@ -1,4 +1,4 @@
-import { LockClock, RemoveRedEye, VerifiedUser } from '@mui/icons-material';
+import { AccessTime, RemoveRedEye, VerifiedUser } from '@mui/icons-material';
 import classes from './Chip.module.scss';
 
 const Chip = props => {
@@ -9,7 +9,7 @@ const Chip = props => {
             iconLeft = <VerifiedUser />;
             break;
         case 'timePosted':
-            iconLeft = <LockClock />;
+            iconLeft = <AccessTime />;
             break;
         case 'visited':
             iconLeft = <RemoveRedEye />;

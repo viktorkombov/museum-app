@@ -1,8 +1,15 @@
-const mongoose = require('mongoose');
+const { databases } = require('../helpers/utils');
+const baseModel = require('./baseModel');
 
-const tokenBlacklistSchema = new mongoose.Schema({
-    token: String,
-}, { timestamps: { createdAt: 'created_at' } });
+function registerToken(token) {
+    return baseModel.post(databases.BLACKLIST_TOKENS, {token});
+}
 
+function findToken(token) {
+    return baseModel.findByColumn(databases.BLACKLIST_TOKENS, token, 'token');
+}
 
-module.exports = mongoose.model('TokenBlacklist', tokenBlacklistSchema);
+module.exports = {
+    registerToken,
+    findToken
+}

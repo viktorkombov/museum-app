@@ -8,14 +8,13 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <link rel="apple-touch-icon" href="../src/images/botev-logo-black.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/react-leaflet-markercluster/dist/styles.min.css"
-    />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/react-leaflet-markercluster/dist/styles.min.css" />
   <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -31,9 +30,53 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>React App</title>
+  <style>
+    .spinner-wrapper {
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: 100vw;
+      z-index: 10;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+    }
+
+    .spinner:after {
+      content: " ";
+      display: block;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border-radius: 50%;
+      border: 6px solid teal;
+      border-color: teal transparent teal transparent;
+      animation: spinner 1.2s linear infinite;
+    }
+
+    @keyframes spinner {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="spinner-wrapper">
+    <div class="spinner"></div>
+  </div>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id='scroll-to-top'></div>
   <div id="root"></div>

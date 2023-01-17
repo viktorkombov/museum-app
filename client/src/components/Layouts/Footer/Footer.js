@@ -1,7 +1,8 @@
 import { Email, FacebookRounded, Instagram, Phone, Room, YouTube } from '@mui/icons-material';
 import { useRef, useState } from 'react';
-import { navigationItems } from '../../../helpers/data';
-import { useResizeObserver } from '../../../helpers/userResizeObserver';
+import { Link } from 'react-router-dom';
+import { navigationItems, navigationItemsWitoutDropdowns } from '../../../utils/data';
+import { useResizeObserver } from '../../../utils/userResizeObserver';
 import IconRounded from '../../UI/IconRounded';
 import classes from './Footer.module.scss';
 
@@ -40,32 +41,32 @@ const Footer = props => {
                         <div>
                             <h5>{navigationItems.museum.name}</h5>
                             <ul>
-                                {navigationItems.museum.items.map(item => <li><a href={item.link}>{item.name}</a></li>)}
+                                {navigationItems.museum.items.map(item => <li><Link to={item.link}>{item.name}</Link></li>)}
                             </ul>
                         </div>
                         <div>
                             <h5>{navigationItems.botev.name}</h5>
                             <ul>
-                                {navigationItems.botev.items.map(item => <li><a href={item.link}>{item.name}</a></li>)}
+                                {navigationItems.botev.items.map(item => <li><Link to={item.link}>{item.name}</Link></li>)}
                             </ul>
                         </div>
                         <div>
                             <h5>{navigationItems.kalofer.name}</h5>
                             <ul>
-                                {navigationItems.kalofer.items.map(item => <li><a href={item.link}>{item.name}</a></li>)}
+                                {navigationItems.kalofer.items.map(item => <li><Link to={item.link}>{item.name}</Link></li>)}
                             </ul>
                         </div>
                         <div>
                             <h5>{navigationItems.aboutUs.name}</h5>
                             <ul>
-                                {navigationItems.aboutUs.items.map(item => <li><a href={item.link}>{item.name}</a></li>)}
+                                {navigationItems.aboutUs.items.map(item => <li><Link to={item.link}>{item.name}</Link></li>)}
                             </ul>
                         </div>
                     </section>
                     <ul className={classes['news']}>
-                        <li><a href="#">Ботва чета</a></li>
-                        <li><a href="#">Ботев - поет и публицист</a></li>
-                        <li><a href="#">Новини</a></li>
+                        <li><Link to={navigationItemsWitoutDropdowns.botevaCheta.botevaCheta.link}>Ботва чета</Link></li>
+                        <li><Link to={navigationItemsWitoutDropdowns.botevPoetJournalist.botevPoetJournalist.link}>Ботев - поет и публицист</Link></li>
+                        <li><Link to="/news">Новини</Link></li>
                     </ul>
                 </section>
             </div>

@@ -3,7 +3,7 @@ import Aside from '../Aside';
 import PostAside from './PostAside';
 import PostBody from './PostBody';
 import PostContent from './PostContent';
-import SimplePost from '../SimplePost';
+import SimplePost from './SimplePost';
 import PostSummary from '../../UI/PostSummary';
 import classes from './Post.module.scss';
 

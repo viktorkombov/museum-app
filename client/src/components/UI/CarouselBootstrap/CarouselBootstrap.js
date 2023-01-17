@@ -5,6 +5,7 @@ import Card from "../Card";
 import Button from "../Button/Button";
 import { Info, KeyboardDoubleArrowDown } from "@mui/icons-material";
 import CarouselImg from "./CarouselImg";
+import { Link } from "react-router-dom";
 
 const CarouselBootstrap = (props) => {
   const [index, setIndex] = useState(props.index);
@@ -16,19 +17,14 @@ const CarouselBootstrap = (props) => {
 
   const slide = type !== 'gallery' ? true : false;
 
-  const titles = {
-    0: "Джобният часовник на Христо Ботев",
-    1: "Мастилницата на Христо Ботев",
-  };
-
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
   return (
-    <div className={classes.wrapper}>
+    <div className={`${classes.wrapper} ${type === 'gallery' ? classes.gallery : ''}`}>
       <Carousel
-        className={`${classes.carousel} ${(type !== 'gallery' || items.length === 1) && 'without-indicators'} `}
+        className={`${classes.carousel} ${(type !== 'gallery' || items.length === 1) ? 'without-indicators' : ''} ${items.length === 1 ? 'without-arrows' : ''}`}
         pause={"hover"}
         fade
         slide={slide}
@@ -58,6 +54,7 @@ const CarouselBootstrap = (props) => {
                 <>
                   <div className={classes['card-wrapper']}>
                     <Card
+                      link="/welcome"
                       width="350px"
                       title="Добре дошли в Национален музей “Христо Ботев” - гр. Калофер"
                       content="Разгледайте нашия сайт, за да научите повече за живота и делото на Христо Ботев."
@@ -65,12 +62,11 @@ const CarouselBootstrap = (props) => {
                     />
                   </div>
                   <div className={classes.summary}>
-                    <h2>{titles[i]}</h2>
+                    <h2>{item.title}</h2>
                     <p>
-                      Разгледайте нашия сайт, за да научите повече за живота и
-                      делото на Христо Ботев.
+                     {item.subtitle}
                     </p>
-                    <Button>Виж повече...</Button>
+                    <Link to={item.link}><Button>Виж повече...</Button></Link>
                   </div>
                   <div className={classes['summary-info-button']}><Info fontSize="large" /></div>
                 </>

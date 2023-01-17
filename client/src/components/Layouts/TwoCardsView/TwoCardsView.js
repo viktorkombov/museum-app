@@ -7,11 +7,10 @@ import { Children } from 'react';
 import Delimiter from '../../UI/Delimiter';
 
 const TwoCardsView = props => {
-    const { whiteHeader } = props;
-    console.log(whiteHeader)
+    const { whiteHeader, className } = props;
     const children = Children.toArray(props.children);
     return (
-        <section className={classes['page-wrapper']}>
+        <section id="content" className={`${classes['page-wrapper']} ${className ? className : ''}`}>
             <SectionHeader white={whiteHeader}>
                 {children[0]}
                 {!whiteHeader && <Delimiter white/>}
@@ -24,6 +23,7 @@ const TwoCardsView = props => {
                     <SideImageCard link="/boteva-cheta/history" image={image1} title={'Даскал Ботевото училище'} content={'Разгледайте Даскал Ботевото училище'} />
                 </div>
             </section>
+            {children[1]}
             {whiteHeader && <Delimiter white/>}
         </section>
     );

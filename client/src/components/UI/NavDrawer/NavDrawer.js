@@ -10,13 +10,15 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { navigationItems } from '../../../helpers/data'
-const NavDrawer = ({ toggleDrawer, open }) => {
+import { navigationItems } from '../../../utils/data'
+import { Link, useLocation } from "react-router-dom";
+const NavDrawer = ({ closeDrawer, toggleDrawer, open }) => {
+
     const accordions = ['museum', 'botev', 'kalofer', 'aboutUs'];
 
     return (
         <Drawer className="drawer" anchor="left" open={open} onClose={toggleDrawer(false)}>
-            <Box  className="drawer-box" sx={{ width: '370px', "*": { fontFamily: '"Comfortaa", sans-serif !important' } }} role="presentation">
+            <Box className="drawer-box" sx={{ width: '370px', "*": { fontFamily: '"Comfortaa", sans-serif !important' } }} role="presentation">
                 <List>
                     <List>
                         <ListItem >
@@ -42,7 +44,7 @@ const NavDrawer = ({ toggleDrawer, open }) => {
                                 <AccordionDetails>
                                     <List>
                                         {navigationItems[accordion].items.map(item => <ListItem key={item.name} disablePadding>
-                                            <ListItemButton component="a" href={item.link}>
+                                            <ListItemButton component={Link} to={item.link}>
                                                 <ListItemText primary={item.name} />
                                             </ListItemButton>
                                         </ListItem>)}

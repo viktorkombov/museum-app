@@ -45,13 +45,20 @@
     }
 }
 
+.first-section-delimiter {
+    display: none;
+    @media screen and (max-width: 1000px) {
+        display: block;
+    }
+}
+
 .welcome {
     position: relative;
     color: #fff;
     display: none;
     article {
         width: 80%;
-        padding: 3.3rem 1.3rem;
+        padding: 1.6rem 2rem;
     }
     @media screen and (max-width: 1000px) {
         display: block;

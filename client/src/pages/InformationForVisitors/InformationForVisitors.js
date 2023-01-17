@@ -1,5 +1,6 @@
 import { Link } from '@mui/material';
 import { Fragment } from 'react';
+// import RichTextEditor from '../../components/FormElements/RichTextEditor';
 import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingImage';
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
@@ -42,6 +43,7 @@ const InformationForVisitors = props => {
             <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
             <Post>
                 <PostBody>
+                    {/* <RichTextEditor /> */}
                     <div style={{ paddingBottom: '2rem' }}>
                         <TwoColumnsTable data={ticketsTableData} title="ВХОДНИ ТАКСИ И БЕСЕДИ" />
                     </div>
@@ -55,7 +57,7 @@ const InformationForVisitors = props => {
                         <p>Входните такси за всички музейни обекти се заплащат на касата на Национален музей „Христо Ботев”.</p>
                     </div>
                     <div style={{ paddingBottom: '2rem' }}>
-                        <p style={{ whiteSpace: 'pre-line' }}><strong>УВАЖАЕМИ ПОСЕТИТЕЛИ,<br/>
+                        <p style={{ whiteSpace: 'pre-line' }}><strong>УВАЖАЕМИ ПОСЕТИТЕЛИ,<br />
                             Церемониите по тържественото връчване на свидетелства на учащите се извършва ИЗВЪН СГРАДАТА на Даскал Ботевото училище (Музей на просветното дело)!</strong></p>
                     </div>
                     <div style={{ paddingBottom: '1rem' }}>

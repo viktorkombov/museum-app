@@ -25,7 +25,7 @@ export default function TwoColumnsTable(props) {
                 </Typography>
             </Toolbar>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-labelledby="tableTitle">
+                <Table  aria-labelledby="tableTitle">
                     <TableHead>
                         <TableRow>
                             <TableCell><strong>{columnNames[0]}</strong></TableCell>

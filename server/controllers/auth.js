@@ -2,8 +2,9 @@ const {
     userModel,
     tokenBlacklistModel
 } = require('../models');
-
+const bcrypt = require('bcrypt');
 const utils = require('../utils');
+const uuid = require('uuid')
 const { authCookieName } = require('../app-config');
 
 const bsonToJson = (data) => { return JSON.parse(JSON.stringify(data)) };
@@ -13,43 +14,27 @@ const removePassword = (data) => {
 }
 
 function register(req, res, next) {
-    const { username, name, surname, profilePicture, password, repeatPassword } = req.body;
-
-    return userModel.create({ username, name, surname, profilePicture, password, repeatPassword })
-        .then((createdUser) => {
-            createdUser = bsonToJson(createdUser);
-            createdUser = removePassword(createdUser);
-
-            const token = utils.jwt.createToken({ id: createdUser._id });
-            if (process.env.NODE_ENV === 'production') {
-                res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
-            } else {
-                res.cookie(authCookieName, token, { httpOnly: true })
-            }
-            res.status(200)
-                .send(createdUser);
-        })
-        .catch(err => {
-            if (err.name === 'MongoError' && err.code === 11000) {
-                let field = err.message.split("index: ")[1];
-                field = field.split(" dup key")[0];
-                field = field.substring(0, field.lastIndexOf("_"));
-
-                res.status(409)
-                    .send({ message: `This ${field} is already registered!` });
-                return;
-            }
-            next(err);
-        });
+    const { username, password, name, surname } = req.body;
+    const id = uuid.v4();
+    
+    return userModel.register({ id, username, password, name, surname }).then(registeredUser => {
+        res.json(registeredUser);
+    }).catch(err => {
+        res.status(409)
+            .send({ message: err.message })
+    });
 }
 
 function login(req, res, next) {
     const { username, password } = req.body;
+    console.log(req.body)
 
-    userModel.findOne({ username })
-        .then(user => {
-            console.log(user)
-            return Promise.all([user, user ? user.matchPassword(password) : false]);
+    userModel.login(username)
+        .then(async foundUsers => {
+            const foundUser = foundUsers[0].length ? foundUsers[0][0] : null;
+            const comparison = await bcrypt.compare(password, foundUser?.password);
+
+            return Promise.all([foundUser, foundUser ? comparison : false])
         })
         .then(([user, match]) => {
             if (!match) {
@@ -63,51 +48,29 @@ function login(req, res, next) {
 
             const token = utils.jwt.createToken({ id: user._id });
 
-            if (process.env.NODE_ENV === 'production') {
-                res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'none', secure: true })
-            } else {
-                res.cookie(authCookieName, token, { httpOnly: true })
-            }
-            console.log(user)
             res.status(200)
-                .send(user);
+                .send({ user, token });
         })
         .catch(next);
 }
 
 function logout(req, res) {
-    const token = req.cookies[authCookieName];
-
-    tokenBlacklistModel.create({ token })
-        .then(() => {
-            res.clearCookie(authCookieName)
-                .status(200)
-                .send({ message: 'Logged out!' });
-        })
-        .catch(err => res.send(err));
-}
-
-function getProfileInfo(req, res, next) {
-    const { _id: userId } = req.user;
-
-    userModel.findOne({ _id: userId }, { password: 0, __v: 0 }) //finding by Id and returning without password and __v
-        .then(user => { res.status(200).json(user) })
-        .catch(next);
-}
-
-function editProfileInfo(req, res, next) {
-    const { _id: userId } = req.user;
-    const { username, name, surname } = req.body;
-
-    userModel.findOneAndUpdate({ _id: userId }, { username, name, surname }, { runValidators: true, new: true })
-        .then(x => { res.status(200).json(x) })
-        .catch(next);
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        tokenBlacklistModel.registerToken(token)
+            .then(() => {
+                res.clearCookie(authCookieName)
+                    .status(200)
+                    .send({ message: 'Logged out!' });
+            })
+            .catch(err => res.send(err));
+    } catch (error) {
+        next();
+    }
 }
 
 module.exports = {
     login,
     register,
-    logout,
-    getProfileInfo,
-    editProfileInfo,
+    logout
 }

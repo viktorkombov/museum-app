@@ -1,4 +1,4 @@
-import img from '../../../images/watch.jpg';
+import img from '../../../images/inc.jpg';
 import image from '../../../images/museum.jpg';
 import image1 from '../../../images/uchilishte.jpg';
 import Card from '../../UI/Card';
@@ -11,27 +11,30 @@ const ThreeCardsView = props => {
             <div className={classes['cards-wrapper']}>
                 <div className={classes.card}>
                     <Card
+                        link="/posts/1"
                         media
                         img={img}
-                        title="Часовникът на Ботев"
+                        title="Изложба за Христо Ботев"
                         content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
                         button="Виж повече..."
                     />
                 </div>
                 <div className={classes.card}>
                     <Card
+                        link="/posts/1"
                         media
                         img={image}
-                        title="Часовникът на Ботев"
+                        title="Нови ескпонати"
                         content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
                         button="Виж повече..."
                     />
                 </div>
                 <div className={classes.card}>
                     <Card
+                        link="/posts/1"
                         media
                         img={image1}
-                        title="Часовникът на Ботев"
+                        title="Гостуваща изложба"
                         content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
                         button="Виж повече..."
                     />

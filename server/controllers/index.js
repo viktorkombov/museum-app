@@ -1,7 +1,9 @@
 const authController = require('./auth');
-const articleController = require('./articleController');
+const postController = require('./post-controller');
+const uploadController = require('./upload-controller');
 
 module.exports = {
     authController,
-    articleController,
+    postController,
+    uploadController
 }

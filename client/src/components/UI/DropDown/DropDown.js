@@ -45,8 +45,8 @@ const DropDown = props => {
     const [show, setShow] = useState(false);
 
     const showDropdown = (e) => {
-        setShow(!show);
-        setIsActive(!show)
+        setShow(true);
+        setIsActive(true)
     }
     const hideDropdown = e => {
         setShow(false);
@@ -54,7 +54,6 @@ const DropDown = props => {
     }
 
     const onToggle = (show, ui) => {
-        console.log('asd')
         setIsActive(show);
     }
 
@@ -76,7 +75,7 @@ const DropDown = props => {
                             itemClassList.push(classes['dropdown-item--first'])
                         }
                         return <Dropdown.Item onClick={hideDropdown} as={Link} to={child.props.to} className={itemClassList.join(' ')} eventKey={i}>
-                            <span>{child}</span></Dropdown.Item>
+                            <span onClick={hideDropdown}>{child}</span></Dropdown.Item>
                     })}
                 </Dropdown.Menu>
             </Fade>

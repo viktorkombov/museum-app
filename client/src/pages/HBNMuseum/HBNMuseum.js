@@ -41,7 +41,7 @@ const HBNMuseum = props => {
     ];
     return (
         <Fragment>
-            <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+            <CarouselBootstrap items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: 'Национален музей "Христо Ботев"' }]}></CarouselBootstrap>
             <Post>
                 <PostBody>
                     <FloatingImagesPage>

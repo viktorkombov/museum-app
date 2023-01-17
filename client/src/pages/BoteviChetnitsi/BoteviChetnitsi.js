@@ -4,7 +4,6 @@ import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingI
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import TwoColumnsView from '../../components/Layouts/TwoColumnsView';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
-import LefletMap from '../../components/UI/LefletMap';
 import img from '../../images/museum.jpg';
 import inc from '../../images/inc.jpg';
 import MasterDetailTable from '../../components/UI/MasterDetailTable';

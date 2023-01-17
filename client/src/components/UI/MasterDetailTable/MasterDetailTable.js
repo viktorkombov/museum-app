@@ -51,10 +51,8 @@ export default function MasterDetailTable({ originalRows, columns, filterBy = 't
   });
 
   React.useEffect(() => {
-    setTimeout(() => {
       setRows(originalRows);
-    }, 1000);
-  }, []);
+  }, [originalRows]);
 
   const isMasterDetail = props.children ? true : false;
 
@@ -76,10 +74,7 @@ export default function MasterDetailTable({ originalRows, columns, filterBy = 't
 
   const requestSearch = (searchedVal) => {
     collapseAll();
-    const filteredRows = originalRows.filter((row) => {
-      return row[filterBy].toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    console.log(filteredRows)
+    const filteredRows = originalRows.filter(row =>  row[filterBy]?.toLowerCase().includes(searchedVal.toLowerCase()));
     setRows(filteredRows);
   };
 
@@ -240,7 +235,7 @@ export default function MasterDetailTable({ originalRows, columns, filterBy = 't
                       : <span>{col.headerText}</span>}
                     {col.headerTextSubtitle && (
                       <div className={classes["header__text-subtitle"]}>
-                        (към 1876 г.)
+                        {col.headerTextSubtitle}
                       </div>
                     )}
                   </TableCell>

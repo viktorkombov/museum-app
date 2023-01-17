@@ -76,7 +76,8 @@
 }
 
 .table-container {
-  height: 523px !important;
+  max-height: 615px !important;
   width: 100% !important;
   overflow-x: auto !important;
+  overflow-y: scroll !important;
 }

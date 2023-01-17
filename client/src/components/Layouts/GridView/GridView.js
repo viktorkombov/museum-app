@@ -7,11 +7,13 @@ import SideImageCard from '../../UI/SideImageCard';
 import SectionHeader from '../../UI/SectionHeader/SectionHeader';
 import { Fragment } from 'react';
 import History from '../History';
-import LefletMap from '../../UI/LefletMap';
+import CarouselBootstrap from '../../UI/CarouselBootstrap';
+import PageTransition from '../../UI/PageTransition';
 
 const GridView = props => {
     return (
-        <Fragment>
+        <PageTransition>
+            <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
             <History>
             </History>
             <section className={classes['grid-view-wrapper']}>
@@ -130,12 +132,8 @@ const GridView = props => {
                         />
                     </div>
                 </section>
-                <div style={{width: '100%', height: '450px'}}>
-                    <LefletMap />
-                </div>
-                <iframe width="600" height="450" style={{ border: 0 }} loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJO7O5TAW7qUARjnOnBrBd1g0&key=AIzaSyBXvSkO_vTWQzKm8gANoDT1i3j7XS80p9E"></iframe>
             </section>
-        </Fragment >
+        </PageTransition >
     );
 }
 

@@ -11,7 +11,7 @@ const config = {
     production: {
         port: process.env.PORT || 5000,
         dbUrl: 'mongodb+srv://viktorkombov:Fo1k67cd45CqBahB@cluster0.3vnvm.mongodb.net/tapan-bg?retryWrites=true&w=majority',
-        origin: ['https://your-articles-spa.herokuapp.com', 'https://your-articles-spa.herokuapp.com/'],
+        origin: ['https://your-posts-spa.herokuapp.com', 'https://your-posts-spa.herokuapp.com/'],
         cookie: 'cookie-for-auth-token',
         secret: 'SecretService'
     }

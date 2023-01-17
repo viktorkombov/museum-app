@@ -1,14 +1,13 @@
 import logo from './logo.svg';
 import Header from './components/Layouts/Header';
 import CarouselBootstrap from './components/UI/CarouselBootstrap';
-import { Fragment, useState } from 'react';
+import { Fragment, Suspense, useEffect, useState } from 'react';
 import Footer from './components/Layouts/Footer';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import classes from './App.module.scss';
 import Home from './pages/Home';
 import Post from './components/Layouts/Post';
 import NavDrawer from './components/UI/NavDrawer';
-import ThreeColumnsPage from './components/Layouts/ThreeColumnsPage';
 import ScrollToTop from './components/UI/ScrollToTop';
 import ThreeCardsView from './components/Layouts/ThreeCardsView/ThreeCardsView';
 import History from './components/Layouts/History';
@@ -41,26 +40,49 @@ import InformationForVisitors from './pages/InformationForVisitors';
 import Publications from './pages/Publications';
 import AnimatedRoutes from './routes/AnimatedRoutes';
 import useScrollTop from './hooks/useScrollTop';
+import LoadingPage from './pages/LoadingPage';
+import ErrorBoundary from './components/ErrorBoundaries/ErrorBoundary';
+import { AuthContext } from './contexts/auth-context';
+import { useAuth } from './hooks/auth-hook';
 
 function App() {
+  const { token, login, logout, userId } = useAuth();
 
   useScrollTop();
 
+  useEffect(() => {
+    setTimeout(() => {
+      const loadingSpinnerWrapper = document.querySelector('.spinner-wrapper');
+      if (loadingSpinnerWrapper) {
+        loadingSpinnerWrapper.remove();
+      }
+    }, 200)
+  }, [])
+
   return (
-    <Fragment>
-      <Header />
-      {/* <div className="header-meader">
-        <div className='gallery-caption-wrapper'></div>
-        <div className='caption-holder'><h3 style={{ color: 'white' }}>Снимките на Ботев Снимките на Ботев Снимките на Ботев Снимките на Ботев</h3></div>
-      </div> */}
-      <main className={classes.main}>
-        <AnimatedRoutes />
-      </main>
-      <div className={classes['fake-footer']}></div>
-      <ScrollToTop />
-      <Footer />
-      {/*  */}
-    </Fragment>
+    <ErrorBoundary>
+      <AuthContext.Provider
+        value={{
+          isLoggedIn: !!token,
+          token: token,
+          userId: userId,
+          login: login,
+          logout: logout
+        }}
+      >
+        <Suspense fallback={
+          <LoadingPage />
+        }>
+          <Header />
+          <main className={classes.main}>
+            <AnimatedRoutes />
+          </main>
+          <div className={classes['fake-footer']}></div>
+          <ScrollToTop />
+          <Footer />
+        </Suspense>
+      </AuthContext.Provider>
+    </ErrorBoundary>
   );
 }
 

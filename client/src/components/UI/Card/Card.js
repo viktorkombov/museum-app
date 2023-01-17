@@ -1,11 +1,12 @@
+import { Link } from 'react-router-dom';
 import classes from './Card.module.scss';
 
 const Card = props => {
-    const { media } = props;
+    const { media, link } = props;
     const cardClasses = props.cardClasses?.length ? props.cardClasses.map(cardClass => classes[cardClass]) : [];
     return (
-        <div className={`${classes.card} ${media && classes['card-media']} ${props.light && classes['card-light']} ${cardClasses.join(' ')}`} style={{
-            backgroundImage: props.img ? `url(${props.img})`: 'none',
+        <Link to={link}><div className={`${classes.card} ${media && classes['card-media']} ${props.light && classes['card-light']} ${cardClasses.join(' ')}`} style={{
+            backgroundImage: props.img ? `url(${props.img})` : 'none',
             backgroundSize: 'cover',
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -23,7 +24,9 @@ const Card = props => {
                 </section>
                 <section className={classes['content-wrapper']}>
                     <p className={classes.content}>
-                        {props.content}
+                        {props.content.length > 75
+                            ? props.content.substring(0, 100) + '...'
+                            : props.content}
                     </p>
                 </section>
                 <section className={classes['button-wrapper']}>
@@ -33,6 +36,7 @@ const Card = props => {
                 </section>
             </section>
         </div>
+        </Link>
     );
 }
 

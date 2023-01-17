@@ -1,3 +1,8 @@
+.map-container {
+    width: 100%;
+    height: 100%;
+}
+
 h4 {
     font-size: 1.3rem !important;
 }
@@ -7,11 +12,9 @@ h4 {
     margin-top: 0;
     margin-bottom: 0.8rem;
 }
+
 .leaflet-popup-content-wrapper {
     overflow: auto;
-}
-.leaflet-popup-content img {
-    margin-bottom: 5px;
 }
 
 .leaflet-popup-content .btn {

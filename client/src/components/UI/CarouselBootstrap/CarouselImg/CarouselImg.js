@@ -5,7 +5,6 @@ import classes from './CarouselImg.module.scss';
 const CarouselImg = props => {
     const [loading, setLoading] = useState(true);
     const { src, type } = props;
-    console.log(src);
     const bgElement = document.querySelector("body");
     let preloaderImg = document.createElement("img");
     preloaderImg.src = src;
