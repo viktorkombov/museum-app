@@ -4,14 +4,17 @@ import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingI
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
 import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import Delimiter from '../../components/UI/Delimiter';
 import Gallery from '../../components/UI/Gallery';
+import { aboutUsCardsContent, uploadsUrl } from '../../utils/data';
 import classes from './Partners.module.scss';
 
 const Partners = props => {
+    const pageTitle = 'Партньори';
     const images = [
         {
             src: "https://muzeibotev.com/clients/152/files/images/PC280968.JPG",
@@ -43,7 +46,7 @@ const Partners = props => {
     ];
     return (
         <Fragment>
-            <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+            <CarouselBootstrap type="withCard" items={[{ src: `${uploadsUrl}/muzey-19.jpg`, title: pageTitle }]}></CarouselBootstrap>
             <Post>
                 <PostBody>
                     <FloatingImagesPage>
@@ -53,30 +56,7 @@ const Partners = props => {
                     </FloatingImagesPage>
 
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={aboutUsCardsContent} currentPageTitle={pageTitle} />
             </Post>
         </Fragment>
 

@@ -2,15 +2,17 @@ import { Fragment } from 'react';
 import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingImage';
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
-import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import Gallery from '../../components/UI/Gallery';
 import PageTransition from '../../components/UI/PageTransition';
+import { hristoBotevCardsContent } from '../../utils/data';
 import classes from './Rodoslovie.module.scss';
 
 const Rodoslovie = props => {
+    const pageTitle = 'Родословие';
     const images = [
         {
             src: "https://muzeibotev.com/clients/152/files/images/sn_5%20semeistvo.jpg",
@@ -42,12 +44,12 @@ const Rodoslovie = props => {
     ];
     return (
         <PageTransition>
-            <CarouselBootstrap items={[{ src: "https://muzeibotev.com/clients/152/files/images/sn_5%20semeistvo.jpg", title: "Родословие" }]} />
+            <CarouselBootstrap items={[{ src: "https://muzeibotev.com/clients/152/files/images/sn_5%20semeistvo.jpg", title: pageTitle }]} />
             <Post>
-                <PostBody>
+            <PostBody history={{ nachalo: 'Начало', null: 'Христо Ботев', rodoslovie: pageTitle }}>
                     <FloatingImagesPage withoutStyledFirstLetter>
                         <Fragment >
-                            <h2>Родословие</h2>
+                            <h2>{pageTitle}</h2>
                             <div style={{ overflowY: 'auto' }}>
                                 <FloatingImage src="https://muzeibotev.com/clients/152/files/images/sn_3%20maikata%20na%20botev.jpg" title="Ивана Ботева Петкова" />
                                 <p><strong>Ивана Ботева Петкова (около 1830-1911)</strong></p>
@@ -99,30 +101,7 @@ const Rodoslovie = props => {
                         <Gallery images={images} />
                     </FloatingImagesPage>
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={hristoBotevCardsContent} currentPageTitle={pageTitle}/>
             </Post>
         </PageTransition>
 

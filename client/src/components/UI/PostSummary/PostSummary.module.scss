@@ -7,13 +7,21 @@
     &:active {
         color: inherit;
     }
+
+    &:last-child .summary {
+        border: none;
+    }
 }
 
 .summary {
     position: relative;
-    border-bottom: 1px solid lighten(map-get($colors, main), 70%);
     padding: 0 0 1rem 0;
     z-index: 1;
+    border-bottom: 1px solid lighten(map-get($colors, main), 70%);
+
+    &:last-child {
+        // border: none;
+    }
 
     .body {
         position: relative;
@@ -36,6 +44,7 @@
             }
         }
     }
+
 }
 
 .last-summary {

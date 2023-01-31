@@ -10,8 +10,12 @@ const { postModel } = require("../models");
 // }
 
 function getPosts(req, res, next) {
-    const queryParams = req.query.keys ? req.query.keys : '*';
-    postModel.getSpecificColumns(queryParams)
+    const columns = req.query.columns ? req.query.columns : '*';
+    const orderBy = req.query.orderby;
+
+    console.log(req.query)
+
+    postModel.getSpecificColumns(columns, orderBy, req.query.limit, req.query.dir, req.query.notEqualTo)
         .then(([result]) => {
             res.json(result)
         })

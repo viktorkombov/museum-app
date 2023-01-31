@@ -3,12 +3,15 @@ import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingI
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
 import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
+import { kaloferCardsContent, uploadsUrl } from '../../utils/data';
 import classes from './Landmarks.module.scss';
 
 const Landmarks = props => {
+    const pageTitle = 'Природа и туризъм';
     const images = [
         {
             src: "https://muzeibotev.com/clients/152/files/images/PC280968.JPG",
@@ -40,12 +43,12 @@ const Landmarks = props => {
     ];
     return (
         <Fragment>
-            <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+            <CarouselBootstrap items={[{ src: `${uploadsUrl}/kalofer-priroda2.jpg`, title: pageTitle }]}></CarouselBootstrap>
             <Post>
-                <PostBody>
+            <PostBody history={{ nachalo: 'Начало', null: 'Калофер', pageTitle: pageTitle }}>
                     <FloatingImagesPage>
                         <Fragment>
-                            <h2>Природа и туризъм</h2>
+                            <h2>{pageTitle}</h2>
                             <div style={{ overflow: 'auto', paddingBottom: '1rem', position: 'relative' }}>
                                 <FloatingImage src="https://muzeibotev.com/clients/152/files/images/P7010034.JPG" />
                                 <p>Калофер е едно от най-живописните Подбалкански градчета с красива природа и гостоприемни жители.</p>
@@ -79,30 +82,8 @@ const Landmarks = props => {
                         </Fragment>
                     </FloatingImagesPage>
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={kaloferCardsContent} currentPageTitle={pageTitle} />
+
             </Post>
         </Fragment>
 

@@ -1,13 +1,22 @@
 import { Email, FacebookRounded, Instagram, Phone, Room, YouTube } from '@mui/icons-material';
-import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { navigationItems, navigationItemsWitoutDropdowns } from '../../../utils/data';
 import { useResizeObserver } from '../../../utils/userResizeObserver';
 import IconRounded from '../../UI/IconRounded';
 import classes from './Footer.module.scss';
 
 const Footer = props => {
+    const [lang, setLang] = useState('bg');
     const ref = useRef(null);
+
+    const location = useLocation();
+    useEffect(() => {
+        const currLang = location.pathname.split('/')[1];
+        if (lang !== location.pathname.split('/')[1]) {
+            setLang(currLang)
+        }
+    }, [location]);
     // Optional callback to access the full DOMRect object if required.
     const optionalCallback = (entry) =>
         document.body.style.setProperty('--footer-height', (entry.height + 64) + 'px');
@@ -17,7 +26,7 @@ const Footer = props => {
 
     return (
         <footer className={classes.footer} ref={ref}>
-            <div className={classes.container}>
+            {lang !== 'en' ? (<div className={classes.container}>
                 <section className={classes['find-us']}>
                     <div className={classes['social-networks']}>
                         <h5>Свържете се с нас</h5>
@@ -32,7 +41,7 @@ const Footer = props => {
                         <ul className={classes.contacts}>
                             <li><Room /><span>Адрес: гр. Калофер, пл. "Христо Ботев" 1</span></li>
                             <li><Phone /><span>Телефон: 03353 23 21</span></li>
-                            <li><Email /><span>E-mail: hristo.botev@gmail.com</span></li>
+                            <li><Email /><span>E-mail: musei_botev@abv.bg</span></li>
                         </ul>
                     </div>
                 </section>
@@ -69,7 +78,26 @@ const Footer = props => {
                         <li><Link to="/news">Новини</Link></li>
                     </ul>
                 </section>
-            </div>
+            </div>) : (<div className={classes.container}>
+                <section className={`${classes['find-us']} ${classes['find-us--en']}`}>
+                    <div className={classes['social-networks']}>
+                        <h5>Contacts</h5>
+                        <ul className={classes['social-networks-links']}>
+                            <li className={classes['icon-list-item']}><IconRounded link="telephone" icon={<Phone />} large /></li>
+                            <li className={classes['icon-list-item']}><IconRounded link="facebook" icon={<FacebookRounded />} large /></li>
+                            <li className={classes['icon-list-item']}><IconRounded link="youtube" icon={<YouTube />} large /></li>
+                            <li className={classes['icon-list-item']}><IconRounded link="instagram" icon={<Instagram />} large /></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul className={classes.contacts}>
+                            <li><Room /><span>Address: 4370 Kalofer, Hristo Botev Str. 5</span></li>
+                            <li><Phone /><span>Phone number: 03133/52-71</span></li>
+                            <li><Email /><span>E-mail: musei_botev@abv.bg</span></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>)}
         </footer >
     );
 }

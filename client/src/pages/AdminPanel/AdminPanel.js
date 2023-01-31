@@ -63,7 +63,7 @@ const AdminPanel = props => {
                     url
                 );
 
-                setPostsData(responseData)
+                setPostsData(responseData);
             } catch (err) { }
         };
         fetchArtilces();

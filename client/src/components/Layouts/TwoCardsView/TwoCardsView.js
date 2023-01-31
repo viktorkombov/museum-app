@@ -17,10 +17,10 @@ const TwoCardsView = props => {
             </SectionHeader>
             <section className={classes['cards-wrapper']}>
                 <div className={classes.card}>
-                    <SideImageCard link="/boteva-cheta/participants" image={image} title={'Национален музей "Христо Ботев"'} content={'Разгледайте Национален музей "Христо Ботев"'} />
+                    <SideImageCard link={props.links[0]} image={props.images[0]} title={props.titles[0]} content={props.contents[0]} />
                 </div>
                 <div className={classes.card}>
-                    <SideImageCard link="/boteva-cheta/history" image={image1} title={'Даскал Ботевото училище'} content={'Разгледайте Даскал Ботевото училище'} />
+                    <SideImageCard link={props.links[1]} image={props.images[1]} title={props.titles[1]} content={props.contents[1]} />
                 </div>
             </section>
             {children[1]}

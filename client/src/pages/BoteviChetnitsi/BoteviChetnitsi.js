@@ -10,8 +10,11 @@ import MasterDetailTable from '../../components/UI/MasterDetailTable';
 import DetailContent from '../../components/UI/MasterDetailTable/DetailContent';
 import image from "../../images/flag-uk.png";
 import classes from './BoteviChetnitsi.module.scss';
+import { Link as RouterLink } from 'react-router-dom';
+import { uploadsUrl } from '../../utils/data';
 
 const BoteviChetnitsi = props => {
+    const pageTitle = 'Ботеви четници';
     function createData(id, imageUrl, name, years, born, died, content) {
         return {
             id,
@@ -172,9 +175,9 @@ const BoteviChetnitsi = props => {
 
     return (
         <Fragment>
-            <CarouselBootstrap type="withCard" items={[{ src: img, title: "150 години от смъртта на Ботев" }, { src: inc, title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
-            <TwoColumnsView table>
-                <h2>Ботевите четници</h2>
+            <CarouselBootstrap items={[{ src: `${uploadsUrl}/botevi-chetnitsi.jpg`, title: "Ботевите четници" }]}></CarouselBootstrap>
+            <TwoColumnsView history={{ nachalo: 'Начало', 'boteva-cheta': 'Ботева чета', 'istoriya': pageTitle }} table>
+                <h2>{pageTitle}</h2>
                 <FloatingImagesPage>
                     <Fragment>
                         <h3>Източници</h3>
@@ -190,7 +193,7 @@ const BoteviChetnitsi = props => {
                         <DetailContent />
                     </MasterDetailTable>
                     <br />
-                    <Link href="#">Състав на Ботевата чета</Link>
+                    <Link component={RouterLink} to="/bg/boteva-cheta/istoria">Ботева чета - история и боен път</Link>
                 </Fragment>
             </TwoColumnsView>
         </Fragment>

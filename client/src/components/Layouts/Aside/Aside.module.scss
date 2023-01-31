@@ -1,10 +1,21 @@
-@import '../../../variables';
+@import "../../../variables";
 .aside {
     display: contents;
     grid-row: 1;
     grid-column: 1 / -1;
     @media screen and (max-width: 800px) {
-        display: none;
+        .body {
+            h3 {
+                text-align: center;
+            }
+            padding-top: 2rem;
+            border-top: 2px solid lighten(map-get($colors, main), 60%);
+            grid-row: 3;
+            grid-column: 1 / -1;
+            a {
+                margin: 0 auto;
+            }
+        }
     }
 }
 
@@ -24,7 +35,6 @@
     @media screen and (max-width: 1250px) {
         grid-column: 5 / 8;
     }
-    
 }
 
 .heading {

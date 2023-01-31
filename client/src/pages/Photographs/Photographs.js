@@ -2,16 +2,18 @@ import { Fragment } from 'react';
 import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingImage';
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
-import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import Delimiter from '../../components/UI/Delimiter';
 import Gallery from '../../components/UI/Gallery';
 import PageTransition from '../../components/UI/PageTransition';
+import { hristoBotevCardsContent, uploadsUrl } from '../../utils/data';
 import classes from './Photographs.module.scss';
 
 const Photographs = props => {
+    const pageTitle = 'Снимките на Ботев';
     const images = [
         {
             src: "https://muzeibotev.com/clients/152/files/images/PC280968.JPG",
@@ -43,12 +45,12 @@ const Photographs = props => {
     ];
     return (
         <PageTransition>
-            <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+            <CarouselBootstrap type="withCard" items={[{ src: `${uploadsUrl}/fotografia-4.jpg`, title: pageTitle }]}></CarouselBootstrap>
             <Post>
-                <PostBody>
+                <PostBody history={{ nachalo: 'Начало', null: 'Христо Ботев', pageTitle: pageTitle }}>
                     <FloatingImagesPage withoutStyledFirstLetter>
                         <Fragment>
-                            <h2>Снимките на Ботев</h2>
+                            <h2>{pageTitle}</h2>
                             <div style={{ overflow: 'auto', paddingBottom: '1rem', position: 'relative' }}>
                                 <p><strong>Най-Известната снимка</strong></p>
                                 <FloatingImage src="https://muzeibotev.com/clients/152/files/images/Botev-foto.jpg" title="Христо Ботев, май 1875 г., Букурещ." />
@@ -79,30 +81,7 @@ const Photographs = props => {
                         </Fragment>
                     </FloatingImagesPage>
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={hristoBotevCardsContent} currentPageTitle={pageTitle} />
             </Post>
         </PageTransition>
 

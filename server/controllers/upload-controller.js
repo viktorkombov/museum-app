@@ -18,8 +18,7 @@ function getUpload(req, res, next) {
 }
 
 function createUpload(req, res, next) {
-    console.log(req.file)
-    const record = {src: req.file.path, title: req.body.title, date: new Date().getTime(), type: req.file.mimetype};
+    const record = {src: 'uploads\\/' + req.file.filename, title: req.body.title, date: new Date().getTime(), type: req.file.mimetype};
     
     uploadModel.post(record)
         .then(createdUpload => {

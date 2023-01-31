@@ -13,8 +13,8 @@ function getAll() {
     return baseModel.getAll(databases.POSTS);
 }
 
-function getSpecificColumns(columns) {
-    return baseModel.getAll(databases.POSTS, columns);
+function getSpecificColumns(columns, orderBy, limit, dir, notEqualTo) {
+    return baseModel.getAll(databases.POSTS, columns, orderBy, limit, dir, notEqualTo);
 }
 
 function findById(id) {

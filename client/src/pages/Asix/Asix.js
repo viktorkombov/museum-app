@@ -21,25 +21,37 @@ import { useNavigate, useParams } from 'react-router-dom';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import { IconButton } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+import ModalBootstrap from '../../components/UI/ModalBootstrap';
+import PostSummary from '../../components/UI/PostSummary';
+import PostAside from '../../components/Layouts/Post/PostAside';
+import LoadingSpinner from '../../components/UI/LoadingSpinner';
 
 const Asix = props => {
+    const [postData, setPostData] = useState({});
+    const [showModal, setShowModal] = useState(false);
+    const [imageIndex, setImageIndex] = useState(0);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
-    const [postData, setPostData] = useState([]);
     const postId = useParams().postId;
-    const images = [];
     const navigate = useNavigate();
+    const images = [];
 
     useEffect(() => {
         const fetchArtilces = async () => {
             try {
-                const responseData = await sendRequest(
+                const mainArticle = await sendRequest(
                     `http://localhost:5000/api/posts/${postId}`
                 );
-                setPostData(responseData);
+                setPostData(mainArticle);
             } catch (err) { }
         };
         fetchArtilces();
     }, []);
+
+    const onImageClick = (index) => {
+        setImageIndex(index);
+        setShowModal(true);
+    };
+
 
     useEffect(() => {
         const myDomain = 'http://localhost:5000';
@@ -51,11 +63,17 @@ const Asix = props => {
                 }
             });
         });
+        document.querySelectorAll('.' + classes['image-wrapper']).forEach((image, i) => {
+            image.addEventListener('click', () => {
+                onImageClick(i);
+            });
+        });
     }, [postData, navigate]);
 
     const postContent = postData.Content;
+    console.log(postData);
 
-    const html = convertToHTML({
+    const html = postContent ? convertToHTML({
         blockToHTML: (block) => {
             if (block.type === 'PARAGRAPH') {
                 return <p />;
@@ -65,6 +83,7 @@ const Asix = props => {
             if (entity.type === 'LINK') {
                 return <a className={classes.anchor} href={entity.data.url}>{originalText}</a>;
             } else if (entity.type === 'IMAGE') {
+                images.push({ src: 'http://localhost:5000/' + entity.data.src, title: entity.data.alt });
                 return (<div>
                     <div className={classes['image-wrapper']}>
                         <img
@@ -79,58 +98,36 @@ const Asix = props => {
             }
             return originalText;
         }
-    })(convertFromRaw(postContent));
+    })(convertFromRaw(postContent)) : '';
 
-    const dummyColumns = [
-        {
-            id: "Title",
-            headerText: "Заглавие",
-            sortable: true,
-            numeric: false,
-            classesOuter: `${classes["name-cell"]}`,
-            classesInner: `${classes["header__text--name-title"]}`,
-        },
-        {
-            id: "Date",
-            headerText: "Дата на публикуване",
-            classesOuter: `${classes["years-cell"]}`,
-            classesInner: `${classes["header__text--years-old-title"]}`,
-        },
-        {
-            id: '',
-            template: row => {
-                return (
-                    <div className={classes['action-buttons']}>
-                        <IconButton onClick={() => console.log('edit ' + row['ID'])}>
-                            <Edit />
-                        </IconButton>
-                        <IconButton onClick={() => console.log('delete ' + row['ID'])}>
-                            <Delete />
-                        </IconButton>
-                    </div>
-                )
-            }
-        }
-    ];
-
+    console.log(images);
     return (
         <PageTransition>
-            <CarouselBootstrap items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "Изложба за Христо Ботев по случай 175-годишнината от рождението му" }]}></CarouselBootstrap>
-            <PostEditContent />
+            <CarouselBootstrap items={[{ src: 'http://localhost:5000/' + postData.CoverImage, title: postData.Title }]}></CarouselBootstrap>
+            {/* <PostEditContent /> */}
             <Post>
-                <PostBody>
-                    <section className={classes.heading}>
-                        <h1>{postData.Title}</h1>
-                        <div className={classes.chips}>
-                            <Chip iconLeft="timePosted">{convertToLocalDate(postData.Date)}</Chip>
-                            <Chip iconLeft="visited">{postData.Count}</Chip>
-                        </div>
-                    </section>
-                    <div dangerouslySetInnerHTML={{ __html: html }} className={classes.content}></div>
-                </PostBody>
-                <>
-                    <div>Kur</div>
-                </>
+                {!isLoading ? (
+                    <PostBody history={{ nachalo: 'Начало', novini: 'Новини', currentPage: postData.Title }}>
+                        <Fragment>
+                            <section className={classes.heading}>
+                                <h1>{postData.Title}</h1>
+                                <div className={classes.chips}>
+                                    <Chip iconLeft="timePosted">{convertToLocalDate(postData.Date)}</Chip>
+                                    <Chip iconLeft="visited">{postData.Count}</Chip>
+                                </div>
+                            </section>
+                            <div dangerouslySetInnerHTML={{ __html: html }} className={classes.content}></div>
+                            <ModalBootstrap show={showModal} close={() => setShowModal(false)}>
+                                <CarouselBootstrap
+                                    items={images}
+                                    index={imageIndex}
+                                    type="gallery"
+                                ></CarouselBootstrap>
+                            </ModalBootstrap>
+                        </Fragment>
+                    </PostBody>
+                ) : <LoadingSpinner/>}
+                <PostAside id={postId} />
             </Post>
         </PageTransition>
 

@@ -6,39 +6,25 @@ import Card from '../../UI/Card';
 import classes from './ThreeCardsView.module.scss';
 
 const ThreeCardsView = props => {
+
+
     return (
-        <div className={classes['first-section-body']}>
+        <div className={`${classes['first-section-body']} ${props.className || ''}`}>
             <div className={classes['cards-wrapper']}>
+                {props.cards?.map(card => (
                 <div className={classes.card}>
                     <Card
-                        link="/posts/1"
+                        link={"/bg/novini/" + card.ID} 
                         media
-                        img={img}
-                        title="Изложба за Христо Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
+                        img={'http://localhost:5000/' + card.CoverImage}
+                        title={card.Title}
+                        content={card.Subtitle ? card.Subtitle : 'Калофер - градът на Ботев'}
+                        count={card.Count}
+                        date={card.Date}
                         button="Виж повече..."
                     />
                 </div>
-                <div className={classes.card}>
-                    <Card
-                        link="/posts/1"
-                        media
-                        img={image}
-                        title="Нови ескпонати"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </div>
-                <div className={classes.card}>
-                    <Card
-                        link="/posts/1"
-                        media
-                        img={image1}
-                        title="Гостуваща изложба"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </div>
+                ))}
             </div>
             {props.children}
         </div>

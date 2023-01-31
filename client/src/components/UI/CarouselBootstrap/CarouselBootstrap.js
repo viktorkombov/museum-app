@@ -39,36 +39,38 @@ const CarouselBootstrap = (props) => {
             {(type !== 'gallery') ? <div className={classes['scroll-button-wrapper']}>
               <div>
                 <a href="#content">
-                  <KeyboardDoubleArrowDown fontSize="large"/>
-                  <p>Към съдържанието</p>
+                  <KeyboardDoubleArrowDown fontSize="large" />
+                  <p>{!props.en ? 'Към съдържанието' : 'Go to the content'}</p>
                 </a>
               </div>
             </div> : <div className={classes['gallery-caption-wrapper']}></div>}
 
             <Carousel.Caption>
-              {(type !== 'withCard') &&
+              {!props.card &&
                 <h1 className={`${classes.title} ${classes[type]}`}>
-                  {item.title.length > 100 ? `${item.title.substring(0, 100)}...` : item.title}
+                  {item.title?.length > 100 ? `${item.title.substring(0, 100)}...` : item.title}
                 </h1>}
-              {type === 'withCard' && (
+              {props.card && (
                 <>
                   <div className={classes['card-wrapper']}>
                     <Card
-                      link="/welcome"
+                      link={props.card.link}
                       width="350px"
-                      title="Добре дошли в Национален музей “Христо Ботев” - гр. Калофер"
-                      content="Разгледайте нашия сайт, за да научите повече за живота и делото на Христо Ботев."
-                      button="Виж повече..."
+                      title={props.card.title}
+                      content={props.card.content}
+                      button={props.card.button}
                     />
                   </div>
-                  <div className={classes.summary}>
+                  {item.title && (<Fragment><div className={classes.summary}>
                     <h2>{item.title}</h2>
                     <p>
-                     {item.subtitle}
+                      {item.subtitle}
                     </p>
                     <Link to={item.link}><Button>Виж повече...</Button></Link>
                   </div>
-                  <div className={classes['summary-info-button']}><Info fontSize="large" /></div>
+                    <div className={classes['summary-info-button']}><Info fontSize="large" /></div>
+                  </Fragment>
+                  )}
                 </>
               )}
               {/* <Card

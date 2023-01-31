@@ -198,6 +198,7 @@
 }
 
 .navigation-main {
+
     li {
         margin-left: 1rem;
     }
@@ -206,6 +207,9 @@
     }
     a {
         color: #fff;
+    }
+    &.navigation-main--en li:first-of-type {
+        margin-right: 0;
     }
 }
 
@@ -217,6 +221,14 @@
         }
         &:nth-child(3) {
             margin-left: 0.8rem !important;
+        }
+    }
+
+    &.navigation-icons--en {
+        .navigation-list-item {
+            &:nth-child(3) {
+                margin-left: 0.5rem !important;
+            }
         }
     }
 }

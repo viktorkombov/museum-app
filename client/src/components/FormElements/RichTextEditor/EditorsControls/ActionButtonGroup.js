@@ -164,7 +164,7 @@ const ActionButtonGroup = props => {
                 </ToggleButton>
             </ToggleButtonGroup>
 
-            <Dialog open={showAddLinkDialog} onClose={handleCloseAddLinkDialog}>
+            <Dialog open={showAddLinkDialog} onClose={handleCloseAddLinkDialog} disableScrollLock>
                 <DialogTitle>Добави хипервръзка</DialogTitle>
                 <DialogContent>
 

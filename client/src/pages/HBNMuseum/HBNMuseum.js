@@ -2,14 +2,16 @@ import { Fragment } from 'react';
 import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingImage';
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
-import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import Gallery from '../../components/UI/Gallery';
+import { museumCardsContent } from '../../utils/data';
 import classes from './HBNMuseum.module.scss';
 
 const HBNMuseum = props => {
+    const pageTitle = 'Национален музей "Христо Ботев"';
     const images = [
         {
             src: "https://muzeibotev.com/clients/152/files/images/PC280968.JPG",
@@ -41,9 +43,9 @@ const HBNMuseum = props => {
     ];
     return (
         <Fragment>
-            <CarouselBootstrap items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: 'Национален музей "Христо Ботев"' }]}></CarouselBootstrap>
+            <CarouselBootstrap items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: pageTitle }]}></CarouselBootstrap>
             <Post>
-                <PostBody>
+                <PostBody history={{ nachalo: 'Начало', null: 'Музей', muzei: 'Национален музей "Христо Ботев"' }}>
                     <FloatingImagesPage>
                         <Fragment>
                             <h2>Музеен комплекс</h2>
@@ -67,30 +69,7 @@ const HBNMuseum = props => {
                         <Gallery images={images} />
                     </FloatingImagesPage>
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={museumCardsContent} currentPageTitle={pageTitle}/>
             </Post>
         </Fragment>
 

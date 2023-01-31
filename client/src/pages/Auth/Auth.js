@@ -42,7 +42,7 @@ const Auth = () => {
                     }
                 );
                 auth.login(responseData.userId, responseData.token);
-                navigate('/posts/new')
+                navigate('/bg/profile')
             } catch (err) { }
     };
 

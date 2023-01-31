@@ -7,7 +7,7 @@ const PostBody = props => {
     return (
         <Fragment>
             <section className={classes.header}>
-                <History />
+                <History history={props.history}/>
             </section>
             <section className={classes.body}>
                 {children}

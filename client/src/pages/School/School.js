@@ -2,22 +2,24 @@ import { Fragment } from 'react';
 import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingImage';
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
-import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import PageTransition from '../../components/UI/PageTransition';
+import { museumCardsContent } from '../../utils/data';
 import classes from './School.module.scss';
 
 const School = props => {
+    const pageTitle = 'Даскал Ботево училище';
     return (
         <PageTransition>
             <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
             <Post>
-                <PostBody>
+            <PostBody history={{ nachalo: 'Начало', null: 'Музей', muzei: pageTitle }}>
                     <FloatingImagesPage>
                         <Fragment>
-                            <h2>Даскал Ботево училище</h2>
+                            <h2>{pageTitle}</h2>
                             <p>Икономическият просперитет, относителната политическа самостоятелност и преди всичко “окопитените”, честни и работливи калоферци допринасят за обособяването на градеца в средище на Българското национално Възраждане. Повишеното материалното благосъстояние на една част от населението и щедрите дарения на калоферските търговци и занаятчии, позволяват отделянето на значителни средства за развитието образованието.</p>
                             <FloatingImage src="https://muzeibotev.com/clients/152/files/images/sn_9-2daskal%20botevo%20uchilishte.JPG" title="Даскал Ботевото училище" />
                             <p>Музей „Христо Ботев” организира и участва в научни сесии и конференции от национален и регионален характер. За повишаване на интереса към родната ни история, музеят организира и приема редица тематични и художествини изложби. Така той се стреми да задоволи нарасналите интереси на многобройните си посетители.</p>
@@ -36,30 +38,7 @@ const School = props => {
                         </Fragment>
                     </FloatingImagesPage>
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={museumCardsContent} currentPageTitle={pageTitle} />
             </Post>
         </PageTransition>
     );

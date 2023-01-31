@@ -2,14 +2,16 @@ import { Fragment } from 'react';
 import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingImage';
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
-import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import PageTransition from '../../components/UI/PageTransition';
+import { hristoBotevCardsContent, uploadsUrl } from '../../utils/data';
 import classes from './Documents.module.scss';
 
 const Documents = props => {
+    const pageTitle = 'Документи';
     const images = [
         {
             src: "https://muzeibotev.com/clients/152/files/images/PC280968.JPG",
@@ -41,9 +43,9 @@ const Documents = props => {
     ];
     return (
         <PageTransition>
-            <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+            <CarouselBootstrap type="withCard" items={[{ src: `${uploadsUrl}/ostavka.png`, title: pageTitle }]}></CarouselBootstrap>
             <Post>
-                <PostBody>
+                <PostBody history={{ nachalo: 'Начало', null: 'Христо Ботев', pageTitle: pageTitle }}>
                     <FloatingImagesPage>
                         <Fragment>
                             <h2>Документи</h2>
@@ -67,30 +69,7 @@ const Documents = props => {
                         </Fragment>
                     </FloatingImagesPage>
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={hristoBotevCardsContent} currentPageTitle={pageTitle} />
             </Post>
         </PageTransition>
     );

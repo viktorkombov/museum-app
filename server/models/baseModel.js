@@ -15,11 +15,21 @@ function put(database, record, id) {
     return db.execute(`UPDATE ${database} SET ${keys} WHERE ID = ?`, [...values, id]);
 }
 
-function getAll(database, columns = '*') {
+function getAll(database, columns = '*', orderBy, limit, dir = 'ASC', notEqualTo) {
     if (Array.isArray(columns)) {
         columns = columns.toString();
     }
-    return db.execute(`SELECT ${columns} FROM ${database}`);
+    let mysqlRequest = `SELECT ${columns} FROM ${database}`;
+
+    if (notEqualTo) {
+        mysqlRequest = mysqlRequest.concat(` WHERE ID <> "${notEqualTo}"`);
+    }
+
+    if (orderBy) {
+       mysqlRequest = mysqlRequest.concat(` ORDER BY ${orderBy} ${dir} LIMIT ${limit}`)
+    }
+
+    return db.execute(mysqlRequest);
 }
 
 function findByColumn(database, id, columnName) {

@@ -149,7 +149,7 @@ const ImageUpload = props => {
                                 style={{marginBottom: '1rem'}}
                             />
                             <FormButton type="submit" disabled={!formState.isValid}>
-                                Качи дайл
+                                Качи файл
                             </FormButton>
                         </form>
                     )

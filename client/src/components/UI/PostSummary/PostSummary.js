@@ -1,18 +1,24 @@
 import classes from './PostSummary.module.scss';
 import EventIcon from '@mui/icons-material/Event';
+import { Link } from 'react-router-dom';
+import {convertToLocalDate} from '../../../utils/functions'
 
-const PostSummary = ({ summary, isLastSummary }) => {
+const PostSummary = props => {
 
     return (
-        <a className={classes['link-wrapper']} href="#">
-            <article className={`${classes.summary} ${isLastSummary ? classes['last-summary'] : ''}`}>
+        <Link className={classes['link-wrapper']} to={'/bg/novini/' + props.id}>
+            <article className={`${classes.summary} ${props.isLastSummary ? classes['last-summary'] : ''}`}>
                 <div className={classes.body}>
-                    <div className={classes.date}><EventIcon fontSize='small' /><span>{summary.date}</span></div>
-                    <h5 className={classes.title}>{summary.title}</h5>
-                    <div>{summary.content}</div>
+                    <div className={classes.date}><EventIcon fontSize='small' /><span>{convertToLocalDate(props.date)}</span></div>
+                    <h5 className={classes.title}>{props.title}</h5>
+                    <p>
+                        {props.subtitle?.length > 100
+                            ? props.subtitle.substring(0, 100) + '...'
+                            : props.subtitle}
+                    </p>
                 </div>
             </article>
-        </a>
+        </Link>
     );
 }
 

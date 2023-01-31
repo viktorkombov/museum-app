@@ -1,16 +1,17 @@
 import { Link } from '@mui/material';
 import { Fragment } from 'react';
-// import RichTextEditor from '../../components/FormElements/RichTextEditor';
 import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingImage';
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
 import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import Delimiter from '../../components/UI/Delimiter';
 import Gallery from '../../components/UI/Gallery';
 import TwoColumnsTable from '../../components/UI/TwoColumnsTable';
+import { aboutUsCardsContent, uploadsUrl } from '../../utils/data';
 import classes from './InformationForVisitors.module.scss';
 const createTicketsTableData = (Услуга, Цена) => {
     return { Услуга, Цена };
@@ -37,13 +38,12 @@ const rentTableData = [
 ]
 
 const InformationForVisitors = props => {
-
+    const pageTitle = 'Дейности и услуги';
     return (
         <Fragment>
-            <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+            <CarouselBootstrap items={[{ src: `${uploadsUrl}/muzey-9.jpg`, title: pageTitle}]}></CarouselBootstrap>
             <Post>
-                <PostBody>
-                    {/* <RichTextEditor /> */}
+            <PostBody history={{ nachalo: 'Начало', null: 'За нас', pageTitle: pageTitle }}>
                     <div style={{ paddingBottom: '2rem' }}>
                         <TwoColumnsTable data={ticketsTableData} title="ВХОДНИ ТАКСИ И БЕСЕДИ" />
                     </div>
@@ -66,41 +66,9 @@ const InformationForVisitors = props => {
                     <div>
                         <p><strong>ГОДИШЕН ОТЧЕТ ЗА  ДЕЙНОСТТА НА НМ "ХРИСТО БОТЕВ", КАЛОФЕР ЗА 2017 Г. (<Link>ТУК</Link>)</strong></p>
                     </div>
-
-
-
-
-
-
-
-
-
-
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={aboutUsCardsContent} currentPageTitle={pageTitle} />
+
             </Post>
         </Fragment>
 

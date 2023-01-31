@@ -3,50 +3,24 @@ import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingI
 import FloatingImagesPage from '../../components/Layouts/FloatingImagesPage/FloatingImagesPage';
 import Post from '../../components/Layouts/Post';
 import PostAside from '../../components/Layouts/Post/PostAside';
+import PostAsideWrapper from '../../components/Layouts/Post/PostAsideWrapper';
 import PostBody from '../../components/Layouts/Post/PostBody';
 import Card from '../../components/UI/Card';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import Gallery from '../../components/UI/Gallery';
+import { kaloferCardsContent, uploadsUrl } from '../../utils/data';
 import classes from './KaloferHistory.module.scss';
 
 const KaloferHistory = props => {
-    const images = [
-        {
-            src: "https://muzeibotev.com/clients/152/files/images/PC280968.JPG",
-            title: `жовник и обществен деец, който учи в Одеса, съставя и превежда учебници, а майка му е от скромно калоферско семейство.[4] Освен Христо Ботев, двамата имат още осем деца: Ана (1850 – 1867), Петко (1852 – 1872), Стефан (1854 – 1890), Кирил (1856 – 1944), Тота (1859 – 1864), Генко (1861 – 1863), Генко (1863 – 1866) и Боян (1866 – 1885).[5]
-        Националният музей „Христо Ботев“ в Калофер Според някои източници Христо Ботев е роден в стая на калоферското училище, в която живеят родителите му. Малко по-късно в Калофер е построено ново училище и семейството наема къща на Генко Филов, в която Ботев прекарва първите няколко години от живота си. Тази къща е унищожена по време на Руско-турската война, но през 1940-те години е възстановена и превърната в Национален музей „Христо Ботев“.[6]
-        През 1854 година Ботьо Петков не успява да се споразумее с калоферската община за заплащането си и се премества в Карлово. Там семейството живее в къщата на майка му в Табашката махала, а Христо Ботев тръгва на училище, като негов учител е баща му. През 1858 година Ботьо Петков обвинява управата на карловската община, че се опитва да си присвои пари, завещани за училището, след което се връща в Калофер. Общината се опитва неуспешно да го настани в къща на живеещия в Цариград търговец Христо Тъпчилещов, след което семейството се настанява в къща на хаджи Нестор. След връщането им в Калофер Христо Ботев постъпва в местното трикласно училище, където учител е баща му.[7]
-        В Одеса и връщане в Калофер Датите са по Юлианския календар (стар стил), о`,
-        },
-        {
-            src: "https://muzeibotev.com/clients/152/files/images/nm_16.JPG",
-            title: "Никола Войновски",
-        },
-        {
-            src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG",
-            title: "Никола Обретанов",
-        },
-        {
-            src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG",
-            title: "Никола Войновски",
-        },
-        {
-            src: "https://muzeibotev.com/clients/152/files/images/PC280968.JPG",
-            title: "Никола Обретанов",
-        },
-        {
-            src: "https://muzeibotev.com/clients/152/files/images/nm_16.JPG",
-            title: "Никола Войновски",
-        },
-    ];
+    const pageTitle = 'История';
     return (
         <Fragment>
-            <CarouselBootstrap type="withCard" items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "150 години от смъртта на Ботев" }, { src: "https://muzeibotev.com/css/skins/custom/152/images/PC280921.JPG", title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+            <CarouselBootstrap type="withCard" items={[{ src: `${uploadsUrl}/star-kalofer.jpg`, title: pageTitle }]}></CarouselBootstrap>
             <Post>
-                <PostBody>
+                <PostBody history={{ nachalo: 'Начало', null: 'Калофер', pageTitle: pageTitle }}>
                     <FloatingImagesPage>
                         <Fragment>
-                            <h2>История</h2>
+                            <h2>{pageTitle}</h2>
                             <p><i>Ако има село по-прибрано, по-добричко и с по-окопитени жители, то е Калофер...Ръкоделно село. Жителите му са в добричко състояние, къщите му са повече двукатни, дървени и послани все домашно...калоферският гайтан и шаяк са прочути по цяло Турско за хубавина...та, според това, то е прославено в народните песни с прякор </i><strong><i>Алтън Калофер.</i></strong></p>
                             <p style={{ textAlign: "right" }}>Иван Богоров</p>
                             <FloatingImage src="http://www.kalofer.com/snimki/accommodations/Kalofer%2009.jpg" title="Калофер отвисоко" />
@@ -66,33 +40,11 @@ const KaloferHistory = props => {
                             <p>Отцелелите от зверствата на поробителите и ужасите на войната се завръщат и заварват родния си град в руини. И отново непримиримият български дух им помага да съградят от пепелищата нов град. Но преди да издигнат домовете си, възстановяват училището и църквите си, защото знаят, че духовността е тази сила, която крепи човека през всичките му изпитания, и ни запазва на този ветровит крастопът, като народ и държавност.</p>
                             <h4>Галерия:</h4>
                         </Fragment>
-                        <Gallery images={images} />
+                        {/* <Gallery images={images} /> */}
                     </FloatingImagesPage>
                 </PostBody>
-                <PostAside>
-                    <h3 className={classes.heading}>Виж още</h3>
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                    <Card
-                        light
-                        maxWidth="350px"
-                        title="Часовникът на Ботев"
-                        content="Разгледайте нашия сайт, за да научите повече за живота и делото на Ботев."
-                        button="Виж повече..."
-                    />
-                </PostAside>
+                <PostAsideWrapper cardsData={kaloferCardsContent} currentPageTitle={pageTitle} />
+
             </Post>
         </Fragment>
 

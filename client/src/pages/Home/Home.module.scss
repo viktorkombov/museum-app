@@ -90,10 +90,8 @@
     }
 
     table {
-        font-family: cursive;
         td {
             padding-bottom: 0.2rem;
-
             &:first-child {
                 white-space: nowrap;
                 font-weight: 900;
@@ -101,6 +99,7 @@
                     height: 1.3rem;
                     width: 1.3rem;
                     margin-right: 0.3rem;
+                    padding-bottom: 0.2rem;
                 }
             }
             &:nth-child(2) {
@@ -164,3 +163,11 @@
         }
     }
 }
+
+.link {
+    color: map-get($colors, links);
+}
+
+// .three-cards-view {
+//     height: calc(100vh - 12rem);
+// }

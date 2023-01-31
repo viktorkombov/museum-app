@@ -44,6 +44,9 @@
     }
     @media screen and (max-width: 380px) {
         display: none;
+        &.find-us--en {
+            display: flex;
+        }
     }
 }
 

@@ -3,14 +3,16 @@ import { Fragment } from 'react';
 import TwoColumnsView from '../../components/Layouts/TwoColumnsView';
 import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import IconRounded from '../../components/UI/IconRounded';
+import { uploadsUrl } from '../../utils/data';
 import classes from './Contacts.module.scss';
 
 const Contacts = props => {
+    const pageTitle ='Контакти';
     return (
         <Fragment>
-            <CarouselBootstrap items={[{ src: "https://muzeibotev.com/clients/152/files/images/PC280963.JPG", title: "Контакти" }]}></CarouselBootstrap>
-            <TwoColumnsView>
-                <h2>Контакти</h2>
+            <CarouselBootstrap items={[{ src: `${uploadsUrl}/muzey-5.jpg`, title: pageTitle }]}></CarouselBootstrap>
+            <TwoColumnsView history={{ nachalo: 'Начало', null: 'За нас', pageTitle: pageTitle }}>
+                <h2>{pageTitle}</h2>
                 <Fragment>
                     <p><strong>Адрес:</strong> 4370 Калофер, ул. „Христо Ботев” № 5</p>
                     <p><strong>тел/факс:</strong> 03133/52-71 – екскурзоводи</p>

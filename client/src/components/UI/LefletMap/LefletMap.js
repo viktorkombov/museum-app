@@ -65,7 +65,6 @@ const LefletMap = props => {
             attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
         });
         if (map) {
-            map.remove();
             var node = document.getElementById("map");
             const parent = node.parentNode;
             parent.removeChild(node);
@@ -95,6 +94,13 @@ const LefletMap = props => {
         });
         map.addLayer(path);
 
+        map.on('fullscreenchange', (e) => {
+            if (map.isFullscreen()) {
+                map.gestureHandling.disable();
+            } else {
+                map.gestureHandling.enable();
+            }
+        })
 
     }, []);
 

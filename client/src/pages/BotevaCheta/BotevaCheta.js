@@ -7,14 +7,14 @@ import CarouselBootstrap from '../../components/UI/CarouselBootstrap';
 import LefletMap from '../../components/UI/LefletMap';
 import img from '../../images/museum.jpg';
 import inc from '../../images/inc.jpg';
-import classes from './BotevaCheta.module.scss';
+import {Link as RouterLink } from 'react-router-dom';
 
 const BotevaCheta = props => {
 
     return (
         <Fragment>
-            <CarouselBootstrap type="withCard" items={[{ src: img, title: "150 години от смъртта на Ботев" }, { src: inc, title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
-            <TwoColumnsView>
+            <CarouselBootstrap items={[{ src: img, title: "150 години от смъртта на Ботев" }, { src: inc, title: "150 години от смъртта на Ботев" }]}></CarouselBootstrap>
+            <TwoColumnsView history={{ nachalo: 'Начало', 'boteva-cheta': 'Ботева чета', 'istoriya': 'Ботева чета - история и боен път' }}>
                 <h2>Ботева чета - история и боен път</h2>
                 <FloatingImagesPage>
                     <Fragment>
@@ -41,12 +41,11 @@ const BotevaCheta = props => {
                         <LefletMap />
                     </div>
                     <br />
-                    <Link href="#">Състав на Ботевата чета</Link>
+                    <Link component={RouterLink} to="/bg/boteva-cheta/botevi-chetnitsi">Състав на Ботевата чета</Link>
                 </Fragment>
             </TwoColumnsView>
         </Fragment>
     )
-
 }
 
 export default BotevaCheta;

@@ -5,6 +5,7 @@ const apiRouter = require('./router');
 const cors = require('cors')
 const { errorHandler } = require('./utils');
 const express = require('express');
+const path = require('path');
 
 // dbConnector()
 //   .then(() => {
@@ -13,7 +14,8 @@ const express = require('express');
     const app = express();
     require('./config/express')(app);
 
-    app.use('/uploads', express.static('uploads'))
+    app.use('/uploads', express.static(path.join('uploads')));
+    app.use(express.static(path.join('public')));
 
     app.use(cors({
       origin: config.origin,
@@ -29,6 +31,10 @@ const express = require('express');
     })
 
     app.use('/api', apiRouter);
+
+    app.use((req, res, next) => {
+      res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+    });
 
     app.use(errorHandler);
 

@@ -45,11 +45,12 @@ const PostEditContent = props => {
     const authSubmitHandler = async event => {
         event.preventDefault();
         try {
-            const editorState = JSON.stringify(convertToRaw(formState.inputs.content.value.getCurrentContent()));
+            const editorState = convertToRaw(formState.inputs.content.value.getCurrentContent());
+            const subtitle = editorState.blocks.find(block => block.text);
             const responseData = await sendRequest(
                 'http://localhost:5000/api/posts' + (props.id ? `/${props.id}` : ''),
                 props.method || 'POST',
-                JSON.stringify({ title: formState.inputs.title.value, content: editorState, coverImage: formState.inputs.coverImage.value }),
+                JSON.stringify({ title: formState.inputs.title.value, content: JSON.stringify(editorState), coverImage: formState.inputs.coverImage.value, subtitle: subtitle?.text || '' }),
                 {
                     'Content-Type': 'application/json'
                 }
@@ -57,7 +58,8 @@ const PostEditContent = props => {
         } catch (err) { }
     };
 
-    const onAddFileClick = () => {
+    const onAddFileClick = (e) => {
+        e.preventDefault();
         setShowAddFileDialog(true);
     };
 
@@ -79,7 +81,8 @@ const PostEditContent = props => {
         setShowAddFileDialog(false);
     }
 
-    const removeCoverImage = () => {
+    const removeCoverImage = (e) => {
+        e.preventDefault();
         inputHandler('coverImage', '');
     }
 

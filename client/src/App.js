@@ -44,6 +44,7 @@ import LoadingPage from './pages/LoadingPage';
 import ErrorBoundary from './components/ErrorBoundaries/ErrorBoundary';
 import { AuthContext } from './contexts/auth-context';
 import { useAuth } from './hooks/auth-hook';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   const { token, login, logout, userId } = useAuth();
@@ -57,31 +58,35 @@ function App() {
         loadingSpinnerWrapper.remove();
       }
     }, 200)
-  }, [])
+  }, []);
+  
+  const helmetContext = {};
 
   return (
     <ErrorBoundary>
-      <AuthContext.Provider
-        value={{
-          isLoggedIn: !!token,
-          token: token,
-          userId: userId,
-          login: login,
-          logout: logout
-        }}
-      >
-        <Suspense fallback={
-          <LoadingPage />
-        }>
-          <Header />
-          <main className={classes.main}>
-            <AnimatedRoutes />
-          </main>
-          <div className={classes['fake-footer']}></div>
-          <ScrollToTop />
-          <Footer />
-        </Suspense>
-      </AuthContext.Provider>
+      <HelmetProvider context={helmetContext}>
+        <AuthContext.Provider
+          value={{
+            isLoggedIn: !!token,
+            token: token,
+            userId: userId,
+            login: login,
+            logout: logout
+          }}
+        >
+          <Suspense fallback={
+            <LoadingPage />
+          }>
+            <Header />
+            <main className={classes.main}>
+              <AnimatedRoutes />
+            </main>
+            <div className={classes['fake-footer']}></div>
+            <ScrollToTop />
+            <Footer />
+          </Suspense>
+        </AuthContext.Provider>
+      </HelmetProvider>
     </ErrorBoundary>
   );
 }

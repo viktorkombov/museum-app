@@ -47,6 +47,10 @@ a {
   color: #fff;
 }
 
+.button {
+  font-family: Comfortaa, Verdana, Geneva, sans-serif !important;
+}
+
 .MuiLink-root {
   font-family: "Comfortaa", sans-serif !important;
   font-weight: 600 !important;
@@ -158,7 +162,7 @@ a {
     align-items: end;
     max-width: 1350px;
     margin: 0 auto;
-    z-index: 2;
+    z-index: 3;
     bottom: 10%;
     @media screen and (max-width: 1000px) {
       justify-content: end;

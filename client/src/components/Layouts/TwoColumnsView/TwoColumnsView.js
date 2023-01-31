@@ -8,7 +8,7 @@ const TwoColumnsView = props => {
     const children = Children.toArray(props.children);
     return (
         <Fragment>
-            <History/>
+            <History history={props.history} />
             {/* <SectionHeader className={table && classes.header}>{children[0]}</SectionHeader> */}
             <div className={`${classes.container} ${table && classes['with-table']}`}>
                 <div className={classes.content}>

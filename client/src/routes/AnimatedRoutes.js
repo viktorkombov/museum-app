@@ -10,15 +10,19 @@ import Auth from '../pages/Auth';
 import { AuthContext } from '../contexts/auth-context';
 import AdminPanel from '../pages/AdminPanel';
 import EditPost from '../pages/EditPost';
+import HomeEN from '../pagesEN/HomeEN/HomeEN';
+import WelcomeEN from '../pagesEN/WelcomeEN';
+import InformationForVisitorsEN from '../pagesEN/InformationForVisitorsEN';
+import ContactsEN from '../pagesEN/ContactsEN';
+import BotevaCheta from '../pages/BotevaCheta/BotevaCheta';
+import BotevaChetaHomePage from '../pages/BotevaChetaHomePage/BotevaChetaHomePage';
 
 const Home = lazy(() => import('../pages/Home'));
 const HBNMuseum = lazy(() => import('../pages/HBNMuseum'));
 const School = lazy(() => import('../pages/School'));
 const GridView = lazy(() => import('../components/Layouts/GridView'));
-const BotevaCheta = lazy(() => import('../pages/BotevaCheta'));
 const Contacts = lazy(() => import('../pages/Contacts'));
 const BotevPoetPublisher = lazy(() => import('../pages/BotevPoetPublisher'));
-const BotevaChetaHomePage = lazy(() => import('../pages/BotevaChetaHomePage/BotevaChetaHomePage'));
 const BoteviChetnitsi = lazy(() => import('../pages/BoteviChetnitsi/BoteviChetnitsi'));
 const Rodoslovie = lazy(() => import('../pages/Rodoslovie'));
 const Letopis = lazy(() => import('../pages/Letopis'));
@@ -46,106 +50,121 @@ const AnimatedRoutes = props => {
     if (auth.token) {
         routes = (
             <>
-                <Route path="/" exact element={<Navigate to="/home" />} />
-                <Route path="/posts/new" element={<NewPost />} exact />
-                <Route path="/profile" element={<AdminPanel />} exact />
-                <Route path="/home" element={<Home />} />
+                <Route path="/" exact element={<Navigate to="/bg/nachalo" />} />
+                <Route path="/bg/profile" element={<AdminPanel />} exact />
+                <Route path="/bg/nachalo" element={<Home />} />
                 <Route />
-                <Route path="/news" element={<GridView />} exact />
                 <Route path="/loading" element={<LoadingPage />} exact />
-                <Route path="/Welcome" element={<Welcome />} exact />
-                
+                <Route path="/bg/dobre-doshli" element={<Welcome />} exact />
 
 
-                <Route path="/posts/1" element={<Asix />} exact />
+                {/* News */}
+                <Route path="/bg/novini" element={<GridView />} exact />
+                <Route path="/bg/novini/create" element={<NewPost />} exact />
+                <Route path="/bg/novini/:postId" element={<Asix />} exact />
+                <Route path="/bg/novini/:postId/edit" element={<EditPost />} exact />
 
                 {/* Boteva Cheta */}
-                <Route path="/boteva-cheta" element={<BotevaChetaHomePage />} exact />
-                <Route path="/boteva-cheta/history" element={<BotevaCheta />} />
-                <Route path="/boteva-cheta/participants" element={<BoteviChetnitsi />} />
+                <Route path="/bg/boteva-cheta" element={<BotevaChetaHomePage />} exact />
+                <Route path="/bg/boteva-cheta/istoria" element={<BotevaCheta />} />
+                <Route path="/bg/boteva-cheta/botevi-chetnitsi" element={<BoteviChetnitsi />} />
 
                 {/* Boteva Poet and Journalist */}
-                <Route path="/botev-poet-journalist" element={<BotevPoetPublisher />} exact />
-                <Route path="/botev-poet-journalist/poems" element={<BotevPoems />} />
-                <Route path="/botev-poet-journalist/publications" element={<Newspapers />} />
+                <Route path="/bg/botev-poet-zhurnalist" element={<BotevPoetPublisher />} exact />
+                <Route path="/bg/botev-poet-zhurnalist/stihotvorenia" element={<BotevPoems />} />
+                <Route path="/bg/botev-poet-zhurnalist/publitsistika" element={<Newspapers />} />
 
                 {/* Museum */}
-                <Route path="/museum/botev-house" element={<HBNMuseum />} />
-                <Route path="/museum/school" element={<School />} />
+                <Route path="/bg/muzei/muzei-hristo-botev" element={<HBNMuseum />} />
+                <Route path="/bg/muzei/uchilishte" element={<School />} />
 
                 {/* Hristo Botev */}
-                <Route path="/hristo-botev/rodoslovie" exact element={<Rodoslovie />} />
-                <Route path="/hristo-botev/letopis" exact element={<Letopis />} />
-                <Route path="/hristo-botev/photos" exact element={<Photographs />} />
-                <Route path="/hristo-botev/belongings" exact element={<Belongings />} />
-                <Route path="/hristo-botev/documents" exact element={<Documents />} />
-                <Route path="/hristo-botev/botev-in-fine-arts" exact element={<Paintings />} />
+                <Route path="/bg/hristo-botev/rodoslovie" exact element={<Rodoslovie />} />
+                <Route path="/bg/hristo-botev/letopis" exact element={<Letopis />} />
+                <Route path="/bg/hristo-botev/snimki" exact element={<Photographs />} />
+                <Route path="/bg/hristo-botev/lichni-veshti" exact element={<Belongings />} />
+                <Route path="/bg/hristo-botev/dokumenti" exact element={<Documents />} />
+                <Route path="/bg/hristo-botev/botev-v-izobrazitelnoto-izkustvo" exact element={<Paintings />} />
 
                 {/* Kalofer */}
-                <Route path="/kalofer/history" exact element={<KaloferHistory />} />
-                <Route path="/kalofer/memorials" exact element={<Memorials />} />
-                <Route path="/kalofer/dantela" exact element={<KaloferskaDantela />} />
-                <Route path="/kalofer/landmarks" exact element={<Landmarks />} />
+                <Route path="/bg/kalofer/istoria" exact element={<KaloferHistory />} />
+                <Route path="/bg/kalofer/pametnitsi" exact element={<Memorials />} />
+                <Route path="/bg/kalofer/dantela" exact element={<KaloferskaDantela />} />
+                <Route path="/bg/kalofer/priroda-i-turizam" exact element={<Landmarks />} />
 
                 {/* About Us */}
-                <Route path="/about-us/working-hours" exact element={<WorkingHours />} />
-                <Route path="/about-us/contacts" exact element={<Contacts />} />
-                <Route path="/about-us/information-for-visitors" exact element={<InformationForVisitors />} />
-                <Route path="/about-us/publications" exact element={<Publications />} />
-                <Route path="/about-us/buyers-profile" exact element={<BuyersProfile />} />
-                <Route path="/about-us/Partners" exact element={<Partners />} />
+                <Route path="/bg/za-nas/rabotno-vreme" exact element={<WorkingHours />} />
+                <Route path="/bg/za-nas/kontakti" exact element={<Contacts />} />
+                <Route path="/bg/za-nas/za-posetiteli" exact element={<InformationForVisitors />} />
+                <Route path="/bg/za-nas/izdania" exact element={<Publications />} />
+                <Route path="/bg/za-nas/profil-na-kupuvacha" exact element={<BuyersProfile />} />
+                <Route path="/bg/za-nas/partnyori" exact element={<Partners />} />
+
+                {/* EN */}
+                <Route path="/en/home" element={<HomeEN />} exact />
+                <Route path="/en/information-for-visitors" exact element={<InformationForVisitorsEN />} />
+                <Route path="/en/contacts" exact element={<ContactsEN />} />
+                <Route path="/en/welcome" element={<WelcomeEN />} exact />
             </>
         );
     } else {
         routes = (
             <>
-                <Route path="/" exact element={<Navigate to="/home" />} />
-                <Route path="/auth" element={<Auth />} exact />
-                <Route path="/home" element={<Home />} />
+                <Route path="/" exact element={<Navigate to="/bg/nachalo" />} />
+                <Route path="/bg/profile" element={<AdminPanel />} exact />
+                <Route path="/bg/nachalo" element={<Home />} />
                 <Route />
-                <Route path="/news" element={<GridView />} exact />
                 <Route path="/loading" element={<LoadingPage />} exact />
-                <Route path="/Welcome" element={<Welcome />} exact />
+                <Route path="/bg/dobre-doshli" element={<Welcome />} exact />
 
 
-                <Route path="/posts/1" element={<Asix />} exact />
-                <Route path="/posts/:postId/edit" element={<EditPost />} />
+                {/* News */}
+                <Route path="/bg/novini" element={<GridView />} exact />
+                <Route path="/bg/novini/create" element={<NewPost />} exact />
+                <Route path="/bg/novini/:postId" element={<Asix />} exact />
+                <Route path="/bg/novini/:postId/edit" element={<EditPost />} exact />
 
                 {/* Boteva Cheta */}
-                <Route path="/boteva-cheta" element={<BotevaChetaHomePage />} exact />
-                <Route path="/boteva-cheta/history" element={<BotevaCheta />} />
-                <Route path="/boteva-cheta/participants" element={<BoteviChetnitsi />} />
+                <Route path="/bg/boteva-cheta" element={<BotevaChetaHomePage />} exact />
+                <Route path="/bg/boteva-cheta/istoria" element={<BotevaCheta />} />
+                <Route path="/bg/boteva-cheta/botevi-chetnitsi" element={<BoteviChetnitsi />} />
 
                 {/* Boteva Poet and Journalist */}
-                <Route path="/botev-poet-journalist" element={<BotevPoetPublisher />} exact />
-                <Route path="/botev-poet-journalist/poems" element={<BotevPoems />} />
-                <Route path="/botev-poet-journalist/publications" element={<Newspapers />} />
+                <Route path="/bg/botev-poet-zhurnalist" element={<BotevPoetPublisher />} exact />
+                <Route path="/bg/botev-poet-zhurnalist/stihotvorenia" element={<BotevPoems />} />
+                <Route path="/bg/botev-poet-zhurnalist/publitsistika" element={<Newspapers />} />
 
                 {/* Museum */}
-                <Route path="/museum/botev-house" element={<HBNMuseum />} />
-                <Route path="/museum/school" element={<School />} />
+                <Route path="/bg/muzei/muzei-hristo-botev" element={<HBNMuseum />} />
+                <Route path="/bg/muzei/uchilishte" element={<School />} />
 
                 {/* Hristo Botev */}
-                <Route path="/hristo-botev/rodoslovie" exact element={<Rodoslovie />} />
-                <Route path="/hristo-botev/letopis" exact element={<Letopis />} />
-                <Route path="/hristo-botev/photos" exact element={<Photographs />} />
-                <Route path="/hristo-botev/belongings" exact element={<Belongings />} />
-                <Route path="/hristo-botev/documents" exact element={<Documents />} />
-                <Route path="/hristo-botev/botev-in-fine-arts" exact element={<Paintings />} />
+                <Route path="/bg/hristo-botev/rodoslovie" exact element={<Rodoslovie />} />
+                <Route path="/bg/hristo-botev/letopis" exact element={<Letopis />} />
+                <Route path="/bg/hristo-botev/snimki" exact element={<Photographs />} />
+                <Route path="/bg/hristo-botev/lichni-veshti" exact element={<Belongings />} />
+                <Route path="/bg/hristo-botev/dokumenti" exact element={<Documents />} />
+                <Route path="/bg/hristo-botev/botev-v-izobrazitelnoto-izkustvo" exact element={<Paintings />} />
 
                 {/* Kalofer */}
-                <Route path="/kalofer/history" exact element={<KaloferHistory />} />
-                <Route path="/kalofer/memorials" exact element={<Memorials />} />
-                <Route path="/kalofer/dantela" exact element={<KaloferskaDantela />} />
-                <Route path="/kalofer/landmarks" exact element={<Landmarks />} />
+                <Route path="/bg/kalofer/istoria" exact element={<KaloferHistory />} />
+                <Route path="/bg/kalofer/pametnitsi" exact element={<Memorials />} />
+                <Route path="/bg/kalofer/dantela" exact element={<KaloferskaDantela />} />
+                <Route path="/bg/kalofer/priroda-i-turizam" exact element={<Landmarks />} />
 
                 {/* About Us */}
-                <Route path="/about-us/working-hours" exact element={<WorkingHours />} />
-                <Route path="/about-us/contacts" exact element={<Contacts />} />
-                <Route path="/about-us/information-for-visitors" exact element={<InformationForVisitors />} />
-                <Route path="/about-us/publications" exact element={<Publications />} />
-                <Route path="/about-us/buyers-profile" exact element={<BuyersProfile />} />
-                <Route path="/about-us/Partners" exact element={<Partners />} />
+                <Route path="/bg/za-nas/rabotno-vreme" exact element={<WorkingHours />} />
+                <Route path="/bg/za-nas/kontakti" exact element={<Contacts />} />
+                <Route path="/bg/za-nas/za-posetiteli" exact element={<InformationForVisitors />} />
+                <Route path="/bg/za-nas/izdania" exact element={<Publications />} />
+                <Route path="/bg/za-nas/profil-na-kupuvacha" exact element={<BuyersProfile />} />
+                <Route path="/bg/za-nas/partnyori" exact element={<Partners />} />
+
+                {/* EN */}
+                <Route path="/en/home" element={<HomeEN />} exact />
+                <Route path="/en/information-for-visitors" exact element={<InformationForVisitorsEN />} />
+                <Route path="/en/contacts" exact element={<ContactsEN />} />
+                <Route path="/en/welcome" element={<WelcomeEN />} exact />
             </>
         );
     }
