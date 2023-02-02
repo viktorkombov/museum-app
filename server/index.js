@@ -33,7 +33,7 @@ const path = require('path');
     app.use('/api', apiRouter);
 
     app.use((req, res, next) => {
-      res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+      res.sendFile(path.resolve(__dirname, 'public/server/pages', 'index.html'));
     });
 
     app.use(errorHandler);

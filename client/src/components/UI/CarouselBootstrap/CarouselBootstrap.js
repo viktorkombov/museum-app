@@ -6,13 +6,24 @@ import Button from "../Button/Button";
 import { Info, KeyboardDoubleArrowDown } from "@mui/icons-material";
 import CarouselImg from "./CarouselImg";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpinner";
 
 const CarouselBootstrap = (props) => {
   const [index, setIndex] = useState(props.index);
+  const [isLoading, setIsLoading] = useState(true);
+
   const { type, items } = props;
 
   useEffect(() => {
-    console.log(props.index)
+    let preloaderImg = document.createElement("img");
+    preloaderImg.src = items[0].src;
+    const loadHandler = () => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 300);
+    }
+    preloaderImg.addEventListener('load', loadHandler);
+    preloaderImg.addEventListener('error', loadHandler);
   }, []);
 
   const slide = type !== 'gallery' ? true : false;
@@ -23,6 +34,8 @@ const CarouselBootstrap = (props) => {
 
   return (
     <div className={`${classes.wrapper} ${type === 'gallery' ? classes.gallery : ''}`}>
+      {isLoading && <LoadingSpinner asOverlay />}
+
       <Carousel
         className={`${classes.carousel} ${(type !== 'gallery' || items.length === 1) ? 'without-indicators' : ''} ${items.length === 1 ? 'without-arrows' : ''}`}
         pause={"hover"}

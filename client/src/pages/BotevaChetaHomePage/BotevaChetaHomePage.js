@@ -8,6 +8,8 @@ import FloatingImage from '../../components/Layouts/FloatingImagesPage/FloatingI
 import botevDetachment0 from '../../images/botev-detachment/botev-detachment0.jpg';
 import { uploadsUrl } from '../../utils/data';
 import SEO from '../../components/SEO/SEO';
+import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import { useState } from 'react';
 
 const BotevaChetaHomePage = props => {
     return (

@@ -1,5 +1,5 @@
 import classes from './Header.module.scss';
-import logo from '../../../images/botev-logo.png';
+import logo from '../../../images/logo-white.png';
 import NavBarDropDown from '../../UI/NavBarDropDown';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { Add, ExitToApp, FacebookRounded, Instagram, Menu, Person, Phone, YouTube } from '@mui/icons-material';
@@ -27,7 +27,7 @@ const item = {
 
 const textItem = (text) => <span className={classes['navigation-text-item']}>{text}</span>;
 
-const Header = () => {
+const Header = props => {
   const [colorChange, setColorchange] = useState(false);
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
   const [lang, setLang] = useState('bg');
@@ -41,7 +41,7 @@ const Header = () => {
       setLang(currLang)
     }
     if (openNavDrawer) {
-      setOpenNavDrawer(false);
+      closeDrawer();
     }
   }, [location]);
 
@@ -186,7 +186,7 @@ const Header = () => {
             </div>
           </nav>
           <div className={classes['toggle-nav-drawer']}>
-            <IconButton aria-label="delete" onClick={toggleDrawer(true)}>
+            <IconButton aria-label="delete" onClick={props.onShowMobileNavigation}>
               <Menu sx={{ color: 'white', fontSize: '3rem' }} />
             </IconButton>
             <NavDrawer closeDrawer={closeDrawer} toggleDrawer={toggleDrawer} open={openNavDrawer} />

@@ -38,14 +38,13 @@ const Home = props => {
             } catch (err) { }
         };
         fetchArtilces();
-
     }, []);
 
     return (
         <Fragment>
             <PageTransition>
                 <CarouselBootstrap card={{ title: 'Добре дошли в Национален музей “Христо Ботев” - гр. Калофер', content: 'Разгледайте нашия сайт, за да научите повече за живота и делото на Христо Ботев.', button: 'Виж повече...', link: '/bg/dobre-doshli' }}
-                    items={[{ src: museumImg, title: 'Национален музей "Христо Ботев"', subtitle: "Разгледайте нашия сайт, за да научите повече за музея на Ботев в Калофер", link: "/bg/muzei/rodna-kashta" }, { src: watchImg, title: "Джобен часовник", subtitle: "Разгледайте нашия сайт, за да научите повече за личните вещи на Христо Ботев", link: "/bg/hristo-botev/lichni-veshti" }, { src: incImg, title: "Пишещи принадлежности", subtitle: "Разгледайте нашия сайт, за да научите повече за личните вещи на Христо Ботев", link: "/bg/hristo-botev/lichni-veshti", }]}></CarouselBootstrap>
+                    items={[{ src: museumImg, title: 'Национален музей "Христо Ботев"', subtitle: "Разгледайте нашия сайт, за да научите повече за музея на Ботев в Калофер", link: "/bg/muzei/muzei-hristo-botev" }, { src: watchImg, title: "Джобен часовник", subtitle: "Разгледайте нашия сайт, за да научите повече за личните вещи на Христо Ботев", link: "/bg/hristo-botev/lichni-veshti" }, { src: incImg, title: "Пишещи принадлежности", subtitle: "Разгледайте нашия сайт, за да научите повече за личните вещи на Христо Ботев", link: "/bg/hristo-botev/lichni-veshti", }]}></CarouselBootstrap>
 
                 <section className={classes.home}>
                     <section className={`${classes.section1} ${classes['first-section']}`}>

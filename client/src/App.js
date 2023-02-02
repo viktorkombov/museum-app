@@ -3,7 +3,7 @@ import Header from './components/Layouts/Header';
 import CarouselBootstrap from './components/UI/CarouselBootstrap';
 import { Fragment, Suspense, useEffect, useState } from 'react';
 import Footer from './components/Layouts/Footer';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import classes from './App.module.scss';
 import Home from './pages/Home';
 import Post from './components/Layouts/Post';
@@ -45,9 +45,21 @@ import ErrorBoundary from './components/ErrorBoundaries/ErrorBoundary';
 import { AuthContext } from './contexts/auth-context';
 import { useAuth } from './hooks/auth-hook';
 import { HelmetProvider } from 'react-helmet-async';
+import { LangContext } from './contexts/lang-context';
+import NavDrawerMobile from './components/UI/NavDrawerMobile';
 
 function App() {
+  const [mobileNavigationIsShown, setMobileNavigationIsShown] = useState(false);
+  const [lang, setLang] = useState('bg');
   const { token, login, logout, userId } = useAuth();
+
+  const location = useLocation();
+  useEffect(() => {
+    const currLang = location.pathname.split('/')[1];
+    if (lang !== location.pathname.split('/')[1]) {
+      setLang(currLang)
+    }
+  }, [location]);
 
   useScrollTop();
 
@@ -59,34 +71,47 @@ function App() {
       }
     }, 200)
   }, []);
-  
+
+
+  const showMobileNavigation = () => {
+    setMobileNavigationIsShown(true);
+  }
+
+  const hideMobileNavigation = () => {
+    setMobileNavigationIsShown(false);
+  }
+
   const helmetContext = {};
 
   return (
     <ErrorBoundary>
-      <HelmetProvider context={helmetContext}>
-        <AuthContext.Provider
-          value={{
-            isLoggedIn: !!token,
-            token: token,
-            userId: userId,
-            login: login,
-            logout: logout
-          }}
-        >
-          <Suspense fallback={
-            <LoadingPage />
-          }>
-            <Header />
-            <main className={classes.main}>
-              <AnimatedRoutes />
-            </main>
-            <div className={classes['fake-footer']}></div>
-            <ScrollToTop />
-            <Footer />
-          </Suspense>
-        </AuthContext.Provider>
-      </HelmetProvider>
+      <LangContext.Provider>
+        <HelmetProvider context={helmetContext}>
+          <AuthContext.Provider
+            value={{
+              isLoggedIn: !!token,
+              token: token,
+              userId: userId,
+              login: login,
+              logout: logout
+            }}
+          >
+            <Suspense fallback={
+              <LoadingPage />
+            }>
+              <div className="background"></div>
+              {mobileNavigationIsShown && <NavDrawerMobile onClose={hideMobileNavigation} />}
+              <Header onShowMobileNavigation={showMobileNavigation} lang={lang} />
+              <main className={classes.main}>
+                <AnimatedRoutes />
+              </main>
+              <div className={classes['fake-footer']}></div>
+              <ScrollToTop />
+              <Footer lang={lang} />
+            </Suspense>
+          </AuthContext.Provider>
+        </HelmetProvider>
+      </LangContext.Provider>
     </ErrorBoundary>
   );
 }

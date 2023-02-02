@@ -22,11 +22,11 @@ const PageTransition = props => {
 
     return (
         <motion.div
-            initial="initial"
-            animate="in"
-            exit="out"
-            style={{overflowX: "hidden"}}
-            variants={pageVariants}
+            // initial="initial"
+            // animate="in"
+            // exit="out"
+            // style={{overflowX: "hidden"}}
+            // variants={pageVariants}
             // transition={pageTransition}
         >
             {children}
